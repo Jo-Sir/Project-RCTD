@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8701821571989516409}
   - component: {fileID: -4034750073756311327}
   - component: {fileID: -777225723601949028}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Black_Tile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -109,9 +109,9 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_Extents: {x: 0.25, y: 0.5, z: 0.25}
   m_MoveThreshold: 0.1
-  m_Carve: 0
+  m_Carve: 1
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0.5
