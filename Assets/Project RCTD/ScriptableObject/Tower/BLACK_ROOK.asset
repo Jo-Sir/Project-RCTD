@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: BLACK_ROOK
   m_EditorClassIdentifier: 
   key: BLACK_ROOK
-  prefab: {fileID: 0}
+  prefab: {fileID: 1254835069927421552, guid: 09cbbd219f341ed4b9c0d8880c5da00c, type: 3}
   initCount: 50

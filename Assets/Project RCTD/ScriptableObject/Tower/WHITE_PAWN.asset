@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: WHITE_PAWN
   m_EditorClassIdentifier: 
   key: WHITE_PAWN
-  prefab: {fileID: 0}
+  prefab: {fileID: 7792290902040294749, guid: d52d8a6c969665b4199df07e30e36b49, type: 3}
   initCount: 50

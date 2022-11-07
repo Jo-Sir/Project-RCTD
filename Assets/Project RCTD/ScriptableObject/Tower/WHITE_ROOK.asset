@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: WHITE_ROOK
   m_EditorClassIdentifier: 
   key: WHITE_ROOK
-  prefab: {fileID: 0}
+  prefab: {fileID: 4809398853501710252, guid: f629391e23079eb42b069cd4cf1e3035, type: 3}
   initCount: 50

@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: WHITE_KING
   m_EditorClassIdentifier: 
   key: WHITE_KING
-  prefab: {fileID: 0}
+  prefab: {fileID: 885517677168114369, guid: e59fa0b17e623b541bd22520a4eb3716, type: 3}
   initCount: 50

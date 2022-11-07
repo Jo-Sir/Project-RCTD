@@ -97,6 +97,7 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
         }
         // 꺼내온 오브젝트 부모를 바꾸고 활성화
         obj.transform.SetParent(parentTransform);
+        obj.transform.position = parentTransform.position;
         obj.gameObject.SetActive(true);
         // obj.transform.position = transform.position;
         return obj;

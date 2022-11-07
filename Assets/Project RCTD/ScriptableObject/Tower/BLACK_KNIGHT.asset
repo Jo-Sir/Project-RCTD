@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: BLACK_KNIGHT
   m_EditorClassIdentifier: 
   key: BLACK_KNIGHT
-  prefab: {fileID: 0}
+  prefab: {fileID: 3929756423204195024, guid: c8a447936db1005429879ff2aba586e4, type: 3}
   initCount: 50
