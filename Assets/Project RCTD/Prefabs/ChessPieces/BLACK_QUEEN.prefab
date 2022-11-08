@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 1792099971466198208}
   - component: {fileID: 1798333466348398748}
   - component: {fileID: 2544350916793028256}
-  - component: {fileID: -7196257432051594022}
   - component: {fileID: 1443806733896821820}
   m_Layer: 8
   m_Name: BLACK_QUEEN
@@ -100,32 +99,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TOWER_TYPE: 8
   COLOR_TYPE: 0
-  baseATK: 0
-  baseAS: 0
-  atkAbleRange: 0
-  projectilesRange: 0
-  target: {fileID: 0}
-  targetLayerMask:
-    serializedVersion: 2
-    m_Bits: 0
---- !u!114 &-7196257432051594022
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1775384317872875068}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 312e6c4d9bda39e4299cd92fb05decf4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TOWER_TYPE: 0
-  COLOR_TYPE: 0
-  baseATK: 0
-  baseAS: 0
-  atkAbleRange: 0
-  projectilesRange: 0
+  baseATK: 100
+  baseAS: 1
+  atkAbleRange: 10
   target: {fileID: 0}
   targetLayerMask:
     serializedVersion: 2

@@ -38,15 +38,10 @@ public class TowerController : MonoBehaviour
                 curTile = hit.transform.GetComponent<IBuildable>();
                 if (curTile.BuildCheck(out curTower))
                 {
-                    // ture 건설 가능
-                    Debug.Log("건설가능");
                     UIManager.Instance.ClickTileUI();
-                    
                 }
                 else
                 {
-                    // false 건설 불가
-                    Debug.Log("건설불가");
                     UIManager.Instance.ClickTowerUI();
                 }
             }
@@ -67,6 +62,7 @@ public class TowerController : MonoBehaviour
     /// </summary>
     public void TowerPurchase()
     {
+        if (GameManager.Instance.Gold < 200) return;
         if (curTile.BuildCheck(out curTower) == false) return;
         int[] towerRange = { 0, 2 };
         Enum key = ((TOWER_TYPE)UnityEngine.Random.Range(towerRange[0], towerRange[1]));
@@ -74,6 +70,7 @@ public class TowerController : MonoBehaviour
         if (curTile == null) return;
         GameObject obj = GameManager.Instance.ObjectGet(key, curTile.GetTransForm());
         obj.transform.position += new Vector3(0, 0.5f, 0);
+        GameManager.Instance.Gold -= 200;
         curTower = obj.GetComponent<Tower>();
         UIManager.Instance.ClickTowerUI();
     }

@@ -18,36 +18,55 @@ public class StageController : MonoBehaviour
     private void Awake()
     {
         time = 10f;
+        GameManager.Instance.Gold = 400;
         UIManager.Instance.TextUpdate("curWave", curWave.ToString());
-        ROUND_TYPE = 0;
+        ObjectPoolManager.Instance.Init();
         WaveTimer();
+
     }
     private void Update()
     {
         WaveTimer();
     }
     #endregion
+
     #region Funcs
     public void WaveTimer()
     {
         if (time > 0)
         {
             time -= Time.deltaTime;
-            UIManager.Instance.TextUpdate("time", $"{time:N2}");
+            if (time < 10)
+            { UIManager.Instance.TextUpdate("time", $"0{time:N2}"); }
+            else
+            { UIManager.Instance.TextUpdate("time", $"{time:N2}"); }
         }
         else
-        { 
+        {
+            if (curWave != 0) ROUND_TYPE++;
             curWave++;
-            ROUND_TYPE++;
             time = 60f;
-            UIManager.Instance.TextUpdate("curWave", curWave.ToString());
+            WaveStart();
         }
+        
     }
-
+    public void WaveStart()
+    {
+        if (curWave == 16)
+        { 
+            Debug.Log("Å¬¸®¾î");
+            return;
+        }
+        GameManager.Instance.Wave = curWave;
+        StartCoroutine(SpawnCreep());
+    }
     IEnumerator SpawnCreep()
     {
-        GameManager.Instance.ObjectGet(ROUND_TYPE, spawnPoint);
-        yield return new WaitForSecondsRealtime(1f);
+        for (int i = 0; i <= 40; i++)
+        {             
+            GameManager.Instance.ObjectGet(ROUND_TYPE, spawnPoint);
+            yield return new WaitForSecondsRealtime(1f);
+        }
     }
     #endregion
 }

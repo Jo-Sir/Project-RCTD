@@ -99,10 +99,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TOWER_TYPE: 1
   COLOR_TYPE: 1
-  baseATK: 0
-  baseAS: 0
-  atkAbleRange: 0
-  projectilesRange: 0
+  baseATK: 10
+  baseAS: 2
+  atkAbleRange: 1
   target: {fileID: 0}
   targetLayerMask:
     serializedVersion: 2

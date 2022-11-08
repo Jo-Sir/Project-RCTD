@@ -11,7 +11,6 @@ public class Tower : MonoBehaviour, IAttackable, IhasColorTYPE
     [SerializeField] protected float baseATK;
     [SerializeField] protected float baseAS;
     [SerializeField] protected float atkAbleRange;
-    [SerializeField] protected float projectilesRange;
     [SerializeField] protected Transform target;
     [SerializeField] protected LayerMask targetLayerMask;
     #endregion SerializeFields
@@ -20,6 +19,7 @@ public class Tower : MonoBehaviour, IAttackable, IhasColorTYPE
     protected float curATK;
     protected float curAS;
     protected float upgrade;
+    protected float projectilesRange;
     private bool isAttack = false;
     private int price;
     #endregion Fields

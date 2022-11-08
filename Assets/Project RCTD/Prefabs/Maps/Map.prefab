@@ -59,14 +59,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7846037331002759624}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 5.15, y: 0, z: 5.98}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.7, y: 0, z: 5.64}
   m_LocalScale: {x: 0.99999976, y: 1, z: 0.99999976}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1840360317759119015}
   m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &5505556493451066742
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -74,6 +74,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1840360317759119015}
     m_Modifications:
+    - target: {fileID: 3869611352981614628, guid: 7671877b18817484d80236cf058e433c, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6191868409548738144, guid: 7671877b18817484d80236cf058e433c, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -142,7 +146,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7065824705888075760, guid: 648f486f348c19648841061232f8319f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.44
+      value: 6.18
       objectReference: {fileID: 0}
     - target: {fileID: 7065824705888075760, guid: 648f486f348c19648841061232f8319f, type: 3}
       propertyPath: m_LocalPosition.y
@@ -180,6 +184,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7065824705888075761, guid: 648f486f348c19648841061232f8319f, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7065824705888075762, guid: 648f486f348c19648841061232f8319f, type: 3}
       propertyPath: m_Name
       value: GoalTile
@@ -198,6 +206,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1840360317759119015}
     m_Modifications:
+    - target: {fileID: 638460912294475215, guid: 766cf8d004abb87418c698567ee54576, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 6.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 638460912294475215, guid: 766cf8d004abb87418c698567ee54576, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.36
+      objectReference: {fileID: 0}
     - target: {fileID: 2794954180877170382, guid: 766cf8d004abb87418c698567ee54576, type: 3}
       propertyPath: m_Name
       value: Walls
