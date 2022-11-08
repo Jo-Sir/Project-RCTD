@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: BLACK
   m_EditorClassIdentifier: 
   key: BLACK
-  prefab: {fileID: 0}
+  prefab: {fileID: 7647744811490609389, guid: 94d51fe8099512d4fa2fb3b240ef8fed, type: 3}
   initCount: 100

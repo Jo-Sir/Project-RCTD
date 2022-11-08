@@ -11,7 +11,9 @@ GameObject:
   - component: {fileID: 4951885441531895539}
   - component: {fileID: 4954302811485279279}
   - component: {fileID: 4964193706449311343}
-  m_Layer: 0
+  - component: {fileID: -5234032134973476662}
+  - component: {fileID: -4559299087432148198}
+  m_Layer: 8
   m_Name: BLACK_KING
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -83,3 +85,39 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &-5234032134973476662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4949495022086121701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 312e6c4d9bda39e4299cd92fb05decf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TOWER_TYPE: 9
+  COLOR_TYPE: 0
+  baseATK: 0
+  baseAS: 0
+  atkAbleRange: 0
+  projectilesRange: 0
+  target: {fileID: 0}
+  targetLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+--- !u!64 &-4559299087432148198
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4949495022086121701}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 0d4dc18442ed9d14698239a5a964f27f, type: 3}

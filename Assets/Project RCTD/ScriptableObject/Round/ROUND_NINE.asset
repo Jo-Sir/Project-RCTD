@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: ROUND_NINE
   m_EditorClassIdentifier: 
   key: ROUND_NINE
-  prefab: {fileID: 0}
+  prefab: {fileID: 5837308259562511082, guid: 69946d30ce41d1e4d9f6db966df4c59c, type: 3}
   initCount: 50

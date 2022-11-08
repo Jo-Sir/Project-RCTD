@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Tower : MonoBehaviour, IAttackable, IColorable
+public class Tower : MonoBehaviour, IAttackable, IhasColorTYPE
 {
     #region SerializeFields
     [SerializeField] protected TOWER_TYPE TOWER_TYPE;
@@ -35,7 +35,7 @@ public abstract class Tower : MonoBehaviour, IAttackable, IColorable
     #region UnitiyEngine
     private void Awake()
     {
-        SetColor();
+        SetCOLOR_TYPE();
         SetPrice();
     }
     private void Update()
@@ -46,7 +46,18 @@ public abstract class Tower : MonoBehaviour, IAttackable, IColorable
     #endregion UnitiyEngine
 
     #region Funcs
-    public abstract void Attack();
+    public void Attack()
+    {
+        StartCoroutine(AttackCool(baseAS));
+        LooksTarget(target, 10f);
+        // 투사체 풀링에서 가져오기
+        GameManager.Instance.ObjectGet(COLOR_TYPE, this.transform);
+        Projectiles projectiles = GetComponentInChildren<Projectiles>();
+        // 풀링해온 오브젝트에 정보전달
+        projectiles.ProjectilesSet(COLOR_TYPE, curATK, projectilesRange, target, targetLayerMask);
+        // 부모해제
+        projectiles.transform.SetParent(null);
+    }
     public bool DetectTarget()
     {
         if (target == null)
@@ -63,7 +74,7 @@ public abstract class Tower : MonoBehaviour, IAttackable, IColorable
         }
         return this.target != null;
     }
-    public void SetColor()
+    public void SetCOLOR_TYPE()
     {
         switch (COLOR_TYPE)
         {
@@ -85,38 +96,20 @@ public abstract class Tower : MonoBehaviour, IAttackable, IColorable
         switch (TOWER_TYPE)
         {
             case TOWER_TYPE.BLACK_PAWN:
-                price = 100;
-                break;
             case TOWER_TYPE.WHITE_PAWN:
                 price = 100;
                 break;
             case TOWER_TYPE.BLACK_KNIGHT:
-                price = 200;
-                break;
-            case TOWER_TYPE.BLACK_ROOK:
-                price = 200;
-                break;
-            case TOWER_TYPE.BLACK_BISHOP:
-                price = 200;
-                break;
             case TOWER_TYPE.WHITE_KNIGHT:
-                price = 200;
-                break;
+            case TOWER_TYPE.BLACK_ROOK:
             case TOWER_TYPE.WHITE_ROOK:
-                price = 200;
-                break;
+            case TOWER_TYPE.BLACK_BISHOP:
             case TOWER_TYPE.WHITE_BISHOP:
                 price = 200;
                 break;
             case TOWER_TYPE.BLACK_QUEEN:
-                price = 400;
-                break;
-            case TOWER_TYPE.BLACK_KING:
-                price = 400;
-                break;
             case TOWER_TYPE.WHITE_QUEEN:
-                price = 400;
-                break;
+            case TOWER_TYPE.BLACK_KING:
             case TOWER_TYPE.WHITE_KING:
                 price = 400;
                 break;

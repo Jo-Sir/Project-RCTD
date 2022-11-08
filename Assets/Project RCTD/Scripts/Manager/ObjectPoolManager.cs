@@ -18,12 +18,12 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
             ObjectDatas datas = GameObject.Find("ObjectDatas").GetComponent<ObjectDatas>();
             objectDatas = datas.Datas;
         }
-        Init();
+        // Init();
     }
     #endregion UnityEngines
 
     #region Funcs
-    private void Init()
+    public void Init()
     {
         // 인스팩터창에서 입력된데이터가 없으면 리턴
         if (objectDatas.Count == 0) { return; }
