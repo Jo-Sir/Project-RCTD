@@ -95,19 +95,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 1880281512398770881}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 312e6c4d9bda39e4299cd92fb05decf4, type: 3}
+  m_Script: {fileID: 11500000, guid: 923d00bca263c9c45ad14ad21531d360, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   TOWER_TYPE: 7
   COLOR_TYPE: 1
-  baseATK: 40
-  baseAS: 3
+  SKILL_TYPE: 5
   atkAbleRange: 4
+  projectilesRange: 2
+  coolTime: 10
+  baseATK: 20
+  baseAS: 2
   target: {fileID: 0}
   targetLayerMask:
     serializedVersion: 2
     m_Bits: 512
-  projectilesRange: 2
 --- !u!64 &279282998677472017
 MeshCollider:
   m_ObjectHideFlags: 0

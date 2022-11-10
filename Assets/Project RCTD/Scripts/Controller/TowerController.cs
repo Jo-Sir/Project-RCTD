@@ -10,7 +10,6 @@ public class TowerController : MonoBehaviour
     private RaycastHit hit;
     private Tower curTower = null;
     private IBuildable curTile = null;
-    private Color preColor;
     #endregion Fields
 
     #region UnityEngines
@@ -69,6 +68,7 @@ public class TowerController : MonoBehaviour
         if (curTower != null) return;
         if (curTile == null) return;
         GameObject obj = GameManager.Instance.ObjectGet(key, curTile.GetTransForm());
+        obj.transform.SetParent(curTile.GetTransForm());
         obj.transform.position += new Vector3(0, 0.5f, 0);
         GameManager.Instance.Gold -= 200;
         curTower = obj.GetComponent<Tower>();
@@ -119,6 +119,7 @@ public class TowerController : MonoBehaviour
         // Debug.Log("다음 단계 : " + key.ToString());
         // 한단계위의 오브젝트 선택한 자리에서 생성
         GameObject obj = GameManager.Instance.ObjectGet(key, parentTransform);
+        obj.transform.SetParent(curTile.GetTransForm());
         obj.transform.position += new Vector3(0, 0.5f, 0);
         curTower = obj.GetComponent<Tower>();
         // choiceTarget 과 sameTraget 오브젝트 풀에 반환 뒤 TOWER_TYPE
@@ -141,12 +142,6 @@ public class TowerController : MonoBehaviour
     public Tower TowerInfo()
     {
         return curTower;
-    }
-    public void ChooseTile(bool on)
-    {
-        // Tile Cur hit.transform.GetComponent<Tile>();
-        // preColor = renderer.material.color;
-        // renderer.material.color = Color.yellow;
     }
     #endregion Funcs
     private void OnDrawGizmos()
