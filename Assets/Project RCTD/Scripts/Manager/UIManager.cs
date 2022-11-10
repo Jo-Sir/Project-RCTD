@@ -27,6 +27,10 @@ public class UIManager : Singleton<UIManager>
     {
         uIController.SetActiveClickTowerUI();
     }
+    public void ClickGroundUI()
+    {
+        uIController.SetActiveClickGroundUI();
+    }
     public void TextUpdate(string changetextName, string text)
     {
         switch (changetextName)

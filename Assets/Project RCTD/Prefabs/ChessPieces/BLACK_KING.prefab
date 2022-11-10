@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4964193706449311343}
   - component: {fileID: -5234032134973476662}
   - component: {fileID: -4559299087432148198}
+  - component: {fileID: 992560818161413984}
   m_Layer: 8
   m_Name: BLACK_KING
   m_TagString: Untagged
@@ -105,7 +106,8 @@ MonoBehaviour:
   target: {fileID: 0}
   targetLayerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
+  projectilesRange: 4
 --- !u!64 &-4559299087432148198
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -120,3 +122,23 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 0d4dc18442ed9d14698239a5a964f27f, type: 3}
+--- !u!95 &992560818161413984
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4949495022086121701}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ccfc6d867db105e4d93f27ccf4aec4cd, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

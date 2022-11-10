@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Tile : MonoBehaviour, IBuildable
 {
+    #region SerializeField
+    [SerializeField] private GameObject particle;
+    #endregion
     #region Fields
     private Tower curTower;
     #endregion Fields
@@ -28,6 +31,17 @@ public class Tile : MonoBehaviour, IBuildable
     public Transform GetTransForm()
     {
         return transform;
+    }
+    public void ParticleOnOff(bool on)
+    {
+        if (on)
+        {
+            particle.SetActive(true);
+        }
+        else
+        { 
+            particle.SetActive(false);
+        }
     }
     #endregion Funcs
 }

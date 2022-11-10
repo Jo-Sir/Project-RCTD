@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1894029910155789035}
   - component: {fileID: -7947382903132323145}
   - component: {fileID: 279282998677472017}
+  - component: {fileID: -4334468308734995244}
   m_Layer: 8
   m_Name: WHITE_BISHOP
   m_TagString: Untagged
@@ -100,13 +101,13 @@ MonoBehaviour:
   TOWER_TYPE: 7
   COLOR_TYPE: 1
   baseATK: 40
-  baseAS: 4
+  baseAS: 3
   atkAbleRange: 4
-  projectilesRange: 0
   target: {fileID: 0}
   targetLayerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
+  projectilesRange: 2
 --- !u!64 &279282998677472017
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -121,3 +122,23 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 9872e0b509ff2d04299e3fe92e0deacc, type: 3}
+--- !u!95 &-4334468308734995244
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1880281512398770881}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ccfc6d867db105e4d93f27ccf4aec4cd, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

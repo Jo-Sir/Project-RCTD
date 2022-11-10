@@ -10,6 +10,7 @@ public class TowerController : MonoBehaviour
     private RaycastHit hit;
     private Tower curTower = null;
     private IBuildable curTile = null;
+    private Color preColor;
     #endregion Fields
 
     #region UnityEngines
@@ -29,13 +30,15 @@ public class TowerController : MonoBehaviour
     /// </summary>
     private void Interaction()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
         {
+            if (hit.transform != null) curTile.ParticleOnOff(false); ;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, 1 << 7))
             {
                 if (hit.transform.GetComponent<IBuildable>() == null) return;
                 curTile = hit.transform.GetComponent<IBuildable>();
+                curTile.ParticleOnOff(true);
                 if (curTile.BuildCheck(out curTower))
                 {
                     UIManager.Instance.ClickTileUI();
@@ -45,16 +48,13 @@ public class TowerController : MonoBehaviour
                     UIManager.Instance.ClickTowerUI();
                 }
             }
-            /*else if (Physics.Raycast(ray, out hit, Mathf.Infinity, 1 << 5))
-            {
-                Debug.Log("UI");
-            }
             else
             {
-                Debug.Log("else");
+                if (curTile != null) curTile.ParticleOnOff(false);
                 curTile = null;
                 curTower = null;
-            }*/
+                UIManager.Instance.ClickGroundUI();
+            }
         }
     }
     /// <summary>
@@ -93,17 +93,17 @@ public class TowerController : MonoBehaviour
         }
         if (sameTraget == null) return;
         int[] towerRange = new int[2];
-        Debug.Log((int)TOWER_TYPE);
+        // Debug.Log((int)TOWER_TYPE);
         if (0 >= (int)TOWER_TYPE || (int)TOWER_TYPE <= 1)
         {
-            Debug.Log("2단계");
+            // Debug.Log("2단계");
             towerRange[0] = 2;
             towerRange[1] = 8;
 
         }
         else if (2 >= (int)TOWER_TYPE || (int)TOWER_TYPE <= 7)
         {
-            Debug.Log("3단계");
+            // Debug.Log("3단계");
             towerRange[0] = 8;
             towerRange[1] = 12;
         }
@@ -116,10 +116,11 @@ public class TowerController : MonoBehaviour
         GameManager.Instance.ObjectReturn(TOWER_TYPE, curTower.gameObject);
         GameManager.Instance.ObjectReturn(TOWER_TYPE, sameTraget.gameObject);
         Enum key = ((TOWER_TYPE)UnityEngine.Random.Range(towerRange[0], towerRange[1]));
-        Debug.Log("다음 단계 : " + key.ToString());
+        // Debug.Log("다음 단계 : " + key.ToString());
         // 한단계위의 오브젝트 선택한 자리에서 생성
         GameObject obj = GameManager.Instance.ObjectGet(key, parentTransform);
         obj.transform.position += new Vector3(0, 0.5f, 0);
+        curTower = obj.GetComponent<Tower>();
         // choiceTarget 과 sameTraget 오브젝트 풀에 반환 뒤 TOWER_TYPE
     }
     /// <summary>
@@ -140,6 +141,12 @@ public class TowerController : MonoBehaviour
     public Tower TowerInfo()
     {
         return curTower;
+    }
+    public void ChooseTile(bool on)
+    {
+        // Tile Cur hit.transform.GetComponent<Tile>();
+        // preColor = renderer.material.color;
+        // renderer.material.color = Color.yellow;
     }
     #endregion Funcs
     private void OnDrawGizmos()

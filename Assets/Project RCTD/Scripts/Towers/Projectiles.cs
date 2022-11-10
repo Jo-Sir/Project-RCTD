@@ -1,14 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 public class Projectiles : MonoBehaviour
 {
+    #region SerializeField
+    [SerializeField] private float lifeTime;
+    [SerializeField] private float speed;
+    // [SerializeField] private 
+    #endregion
+
     #region Fields
     private COLOR_TYPE COLOR_TYPE;
     private Transform target;
     private float atk;
-    private float speed;
     private float range;
     private LayerMask targetLayerMask;
     #endregion Fields
@@ -18,9 +24,9 @@ public class Projectiles : MonoBehaviour
     {
         Launch();
     }
-    private void OnTriggerEnter(Collider other)
+    private void OnEnable()
     {
-        Arrived(other);
+        StartCoroutine(LifeTime());
     }
     #endregion UnityEngines
 
@@ -28,8 +34,16 @@ public class Projectiles : MonoBehaviour
     private void Launch()
     {
         transform.LookAt(target);
-        Vector3 newPostion = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
-        transform.position = newPostion;
+        Vector3 targetVec = new Vector3(target.transform.position.x, target.transform.position.y, target.transform.position.z);
+        float distanceToTarget = (targetVec - transform.position).sqrMagnitude;
+        if (distanceToTarget > Mathf.Pow(0.1f, 2))
+        {
+            transform.position = Vector3.MoveTowards(transform.position, targetVec, speed* Time.deltaTime);
+            if (distanceToTarget < Mathf.Pow(0.2f, 2))
+            {
+                Arrived(target);
+            }
+        }
     }
     public void ProjectilesSet(COLOR_TYPE COLOR_TYPE, float atk, float range, Transform target, LayerMask targetLayerMask)
     {
@@ -39,7 +53,7 @@ public class Projectiles : MonoBehaviour
         this.target = target;
         this.targetLayerMask = targetLayerMask;
     }
-    private void Arrived(Collider other)
+    private void Arrived(Transform inputTarget)
     {
         switch (COLOR_TYPE)
         {
@@ -54,7 +68,7 @@ public class Projectiles : MonoBehaviour
                 }
                 break;
             case COLOR_TYPE.WHITE:
-                other.GetComponent<Creep>()?.TakeHit(atk);
+                inputTarget.GetComponent<Creep>()?.TakeHit(atk);
                 break;
             default:
                 break;
@@ -62,5 +76,13 @@ public class Projectiles : MonoBehaviour
         // ¹Ý³³
         GameManager.Instance.ObjectReturn(COLOR_TYPE, this.gameObject);
     }
+
+
     #endregion Funcs
+
+    IEnumerator LifeTime()
+    {
+        yield return new WaitForSeconds(lifeTime);
+        GameManager.Instance.ObjectReturn(COLOR_TYPE, this.gameObject);
+    }
 }

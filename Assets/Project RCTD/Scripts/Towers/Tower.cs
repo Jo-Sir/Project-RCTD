@@ -13,15 +13,16 @@ public class Tower : MonoBehaviour, IAttackable, IhasColorTYPE
     [SerializeField] protected float atkAbleRange;
     [SerializeField] protected Transform target;
     [SerializeField] protected LayerMask targetLayerMask;
+    [SerializeField] protected float projectilesRange;
     #endregion SerializeFields
 
     #region Fields
     protected float curATK;
     protected float curAS;
-    protected float upgrade;
-    protected float projectilesRange;
-    private bool isAttack = false;
+    protected float upgrade = 0;
     private int price;
+    private bool isAttack = false;
+    private Animator animator;
     #endregion Fields
 
     #region Properties
@@ -35,12 +36,13 @@ public class Tower : MonoBehaviour, IAttackable, IhasColorTYPE
     #region UnitiyEngine
     private void Awake()
     {
+        animator = GetComponent<Animator>();
         SetCOLOR_TYPE();
         SetPrice();
     }
-    private void Update()
+    private void FixedUpdate()
     {
-        if (DetectTarget() && isAttack == false)
+        if (isAttack == false && DetectTarget())
         { Attack(); }
     }
     #endregion UnitiyEngine
@@ -48,29 +50,34 @@ public class Tower : MonoBehaviour, IAttackable, IhasColorTYPE
     #region Funcs
     public void Attack()
     {
+        animator.Play("TowerAttack");
         StartCoroutine(AttackCool(baseAS));
-        LooksTarget(target, 10f);
-        // 투사체 풀링에서 가져오기
-        GameManager.Instance.ObjectGet(COLOR_TYPE, this.transform);
-        Projectiles projectiles = GetComponentInChildren<Projectiles>();
-        // 풀링해온 오브젝트에 정보전달
-        projectiles.ProjectilesSet(COLOR_TYPE, curATK, projectilesRange, target, targetLayerMask);
-        // 부모해제
+        GameObject obj = GameManager.Instance.ObjectGet(COLOR_TYPE, this.transform);
+        obj.transform.position = new Vector3(transform.position.x, 1f, transform.position.z);
+        Projectiles projectiles = obj.GetComponentInChildren<Projectiles>();
         projectiles.transform.SetParent(null);
+        projectiles.ProjectilesSet(COLOR_TYPE, CurATK, projectilesRange, target, targetLayerMask);
     }
     public bool DetectTarget()
     {
-        if (target == null)
+        Collider[] targetColliders = Physics.OverlapSphere(this.transform.position, atkAbleRange, targetLayerMask);
+        float curDist = 100f;
+        if (targetColliders.Length > 0)
         {
-            Collider[] target = Physics.OverlapSphere(this.transform.position, atkAbleRange, targetLayerMask);
-            if (target.Length > 0)
+            foreach (Collider target in targetColliders)
             {
-                this.target = target[0].transform;
+                Vector3 targetVec = new Vector3(target.transform.position.x, target.transform.position.y, target.transform.position.z);
+                float distanceToTarget = (targetVec - transform.position).sqrMagnitude;
+                if (curDist >= (distanceToTarget))
+                {
+                    curDist = distanceToTarget;
+                    this.target = target.transform;
+                }
             }
-            else
-            {
-                this.target = null;
-            }
+        }
+        else
+        {
+            this.target = null;
         }
         return this.target != null;
     }
@@ -79,12 +86,12 @@ public class Tower : MonoBehaviour, IAttackable, IhasColorTYPE
         switch (COLOR_TYPE)
         {
             case COLOR_TYPE.BLACK:
-                baseATK *= 0.5f;
-                baseAS *= 0.5f;
+                curATK = baseATK * 0.5f;
+                curAS = baseAS * 0.5f;
                 break;
             case COLOR_TYPE.WHITE:
-                baseATK *= 1.5f;
-                baseAS *= 1.5f;
+                curATK = baseATK * 1.5f;
+                curAS = baseAS * 1.5f;
                 projectilesRange = 0f;
                 break;
             default:

@@ -12,17 +12,17 @@ public class StageController : MonoBehaviour
     private int curWave = 0;
     private float time;
     private ROUND_TYPE ROUND_TYPE;
+    private int spawnCount;
     #endregion
 
     #region UnityEngine
     private void Awake()
     {
         time = 10f;
-        GameManager.Instance.Gold = 400;
+        GameManager.Instance.Gold = 10000;
         UIManager.Instance.TextUpdate("curWave", curWave.ToString());
         ObjectPoolManager.Instance.Init();
         WaveTimer();
-
     }
     private void Update()
     {
@@ -46,6 +46,8 @@ public class StageController : MonoBehaviour
             if (curWave != 0) ROUND_TYPE++;
             curWave++;
             time = 60f;
+            if (((int)ROUND_TYPE+1) % 5 == 0) spawnCount = 1;
+            else spawnCount = 40;
             WaveStart();
         }
         
@@ -54,7 +56,7 @@ public class StageController : MonoBehaviour
     {
         if (curWave == 16)
         { 
-            Debug.Log("클리어");
+            // Debug.Log("클리어");
             return;
         }
         GameManager.Instance.Wave = curWave;
@@ -62,10 +64,10 @@ public class StageController : MonoBehaviour
     }
     IEnumerator SpawnCreep()
     {
-        for (int i = 0; i <= 40; i++)
+        for (int i = 0; i < spawnCount; i++)
         {             
             GameManager.Instance.ObjectGet(ROUND_TYPE, spawnPoint);
-            yield return new WaitForSecondsRealtime(1f);
+            yield return new WaitForSeconds(1f);
         }
     }
     #endregion

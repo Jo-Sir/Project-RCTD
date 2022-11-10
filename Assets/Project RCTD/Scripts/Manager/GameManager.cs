@@ -18,7 +18,7 @@ public class GameManager : Singleton<GameManager>
         {
             life = value;
             UIManager.Instance.TextUpdate("life", life.ToString());
-            if (life == 0) Debug.Log("게임종료");
+            //if (life == 0) Debug.Log("게임종료");
         }
         get => life;
     }
@@ -50,12 +50,7 @@ public class GameManager : Singleton<GameManager>
         gold = 400;
         wave = 0;
         life = 10;
-    }
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.S))
-        { 
-        }
+        Time.timeScale = 1f;
     }
     #endregion UnityEngines
 

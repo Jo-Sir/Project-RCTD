@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3952033376639903574}
   - component: {fileID: -740733241298657068}
   - component: {fileID: 7690227524716538388}
+  - component: {fileID: -3485513812784493352}
   m_Layer: 8
   m_Name: BLACK_KNIGHT
   m_TagString: Untagged
@@ -101,11 +102,12 @@ MonoBehaviour:
   COLOR_TYPE: 0
   baseATK: 20
   baseAS: 1
-  atkAbleRange: 2
+  atkAbleRange: 3
   target: {fileID: 0}
   targetLayerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
+  projectilesRange: 2
 --- !u!64 &7690227524716538388
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -120,3 +122,23 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 3d375d4a1907b3f4098bb64446492fed, type: 3}
+--- !u!95 &-3485513812784493352
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3929756423204195024}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ccfc6d867db105e4d93f27ccf4aec4cd, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
