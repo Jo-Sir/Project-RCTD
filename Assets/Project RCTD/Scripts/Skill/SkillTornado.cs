@@ -12,7 +12,7 @@ public class SkillTornado : AttackSkill
 
     IEnumerator TornadoAttack()
     {
-        for (int i = 0; i < 3; i++)
+        for (float i = 0; i < 3; i+=0.1f)
         {
             Collider[] targets = Physics.OverlapSphere(transform.position, range, layerMask);
             if (targets.Length > 0)
@@ -22,7 +22,7 @@ public class SkillTornado : AttackSkill
                     target.GetComponent<IDamagable>().TakeHit(totalAtk);
                 }
             }
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(0.1f);
         }
         particleSystem.Stop();
     }

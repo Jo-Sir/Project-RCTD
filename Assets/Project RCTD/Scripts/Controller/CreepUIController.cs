@@ -31,7 +31,7 @@ public class CreepUIController : MonoBehaviour
     }
     private void Update()
     {
-        transform.LookAt(Camera.main.transform);
+        transform.rotation = Quaternion.Euler(90f, 0, 0);
     }
     private void OnEnable()
     {

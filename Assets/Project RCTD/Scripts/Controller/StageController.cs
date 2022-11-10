@@ -46,26 +46,44 @@ public class StageController : MonoBehaviour
             if (curWave != 0) ROUND_TYPE++;
             curWave++;
             time = 60f;
-            if (((int)ROUND_TYPE+1) % 5 == 0) spawnCount = 1;
+            if (((int)ROUND_TYPE + 1) % 5 == 0) spawnCount = 1;
             else spawnCount = 40;
             WaveStart();
         }
-        
+
     }
     public void WaveStart()
     {
         if (curWave == 16)
-        { 
+        {
             // Debug.Log("Å¬¸®¾î");
             return;
         }
         GameManager.Instance.Wave = curWave;
         StartCoroutine(SpawnCreep());
     }
+    public void MissionStart(int step)
+    {
+        switch (step)
+        {
+            case 1:
+                GameManager.Instance.ObjectGet(ROUND_TYPE.MISSION_ONE, spawnPoint);
+                break;
+            case 2:
+                GameManager.Instance.ObjectGet(ROUND_TYPE.MISSION_TWO, spawnPoint);
+                break;
+            case 3:
+                GameManager.Instance.ObjectGet(ROUND_TYPE.MISSION_THREE, spawnPoint);
+                break;
+        }
+    }
+    #endregion
+
+    #region IEnumerator
     IEnumerator SpawnCreep()
     {
         for (int i = 0; i < spawnCount; i++)
-        {             
+        {
             GameManager.Instance.ObjectGet(ROUND_TYPE, spawnPoint);
             yield return new WaitForSeconds(1f);
         }

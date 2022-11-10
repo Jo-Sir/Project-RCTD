@@ -16,14 +16,42 @@ public abstract class AttackTower : Tower, IAttackable
     protected float curAS;
     protected float upgrade = 0;
     protected bool isAttack = false;
-    protected float skillProbability = 10f;
+    protected float skillProbability = 1f;
     #endregion Fields
 
     #region Properties
-    public float CurATK { get => baseATK + Upgrade; }
+    public float CurATK { get => curATK + (Upgrade * 10f); }
     public float CurAS { get => baseAS; }
-    public float Upgrade { set => upgrade = value; get => upgrade * baseATK; }
-    public float SkillProbability { set => skillProbability = skillProbability + value; get => skillProbability; }
+    public float Upgrade 
+    {
+        get
+        {
+            switch (COLOR_TYPE)
+            {
+                case COLOR_TYPE.BLACK:
+                    upgrade = GameManager.Instance.UpgradeBlackLV;
+                    break;
+                case COLOR_TYPE.WHITE:
+                    upgrade = GameManager.Instance.UpgradeWhiteLV;
+                    break;
+            }
+            return upgrade;
+        }
+    }
+    public float SkillProbability
+    {
+        get 
+        {
+            if (skillProbability <= 100)
+            {
+                return skillProbability + Upgrade;
+            }
+            else
+            {
+                return 100f;
+            }
+        }
+    }
     #endregion Properties
 
     #region UnityEngine
@@ -39,7 +67,7 @@ public abstract class AttackTower : Tower, IAttackable
     {
         animator.Play("TowerAttack");
         StartCoroutine(AttackCool(baseAS));
-        if (skillCoolTimeOn && (SkillProbability >= Random.Range(0f, 100f))) { UseSkill(); }
+        if (skillCoolTimeOn && ((SkillProbability+Upgrade) >= Random.Range(0f, 100f))) { UseSkill(); }
         GameObject obj = GameManager.Instance.ObjectGet(COLOR_TYPE, this.transform);
         obj.transform.position = new Vector3(transform.position.x, 1f, transform.position.z);
         Projectiles projectiles = obj.GetComponentInChildren<Projectiles>();
@@ -88,7 +116,7 @@ public abstract class AttackTower : Tower, IAttackable
         }
     }
     #endregion
-    
+
     #region IEnumerators
     protected virtual IEnumerator AttackCool(float baseAS)
     {

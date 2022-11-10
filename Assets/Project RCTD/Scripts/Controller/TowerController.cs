@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using System;
+using UnityEngine.Events;
 
 public class TowerController : MonoBehaviour
 {
@@ -13,15 +14,18 @@ public class TowerController : MonoBehaviour
     #endregion Fields
 
     #region UnityEngines
-    private void Awake()
-    {
-        transform.position = Camera.main.transform.position;
-    }
     private void Update()
     {
         Interaction();
     }
     #endregion UnityEngines
+
+    #region Property
+    public Tower CurTower
+    { 
+        get => curTower;
+    }
+    #endregion
 
     #region Funcs
     /// <summary>
@@ -46,6 +50,7 @@ public class TowerController : MonoBehaviour
                 {
                     UIManager.Instance.ClickTowerUI();
                 }
+                UIManager.Instance.TowerInfoUpdate();
             }
             else
             {

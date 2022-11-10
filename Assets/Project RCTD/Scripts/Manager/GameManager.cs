@@ -9,6 +9,8 @@ public class GameManager : Singleton<GameManager>
     private int wave;
     private int gold;
     private int life;
+    private int upgradeBlackLV;
+    private int upgradeWhiteLV;
     #endregion Fields
 
     #region Properties
@@ -41,6 +43,8 @@ public class GameManager : Singleton<GameManager>
         }
         get => wave;
     }
+    public int UpgradeWhiteLV { get => upgradeWhiteLV; set => upgradeWhiteLV = value; }
+    public int UpgradeBlackLV { get => upgradeBlackLV; set => upgradeBlackLV = value; }
     #endregion
 
     #region UnityEngines
@@ -50,7 +54,6 @@ public class GameManager : Singleton<GameManager>
         gold = 400;
         wave = 0;
         life = 10;
-        Time.timeScale = 1f;
     }
     #endregion UnityEngines
 

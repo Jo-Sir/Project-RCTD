@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bb1ce107890f5154e8f994d6ad8471f5, type: 3}
-  m_Name: WHITE_ROOK_SKILL
+  m_Name: MISSION_THREE
   m_EditorClassIdentifier: 
-  key: WHITE_ROOK_SKILL
-  prefab: {fileID: 4509118318978874838, guid: 93ae136b25cbf72429a822a29293cd3c, type: 3}
-  initCount: 50
+  key: MISSION_THREE
+  prefab: {fileID: 3902585919624804087, guid: 79358598bbfa54c45869ba08fc6fc654, type: 3}
+  initCount: 10

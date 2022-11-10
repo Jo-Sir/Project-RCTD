@@ -4993,7 +4993,7 @@ GameObject:
   - component: {fileID: 9016968700204943304}
   - component: {fileID: 9191207276800803482}
   - component: {fileID: 9220118435716768090}
-  - component: {fileID: -1558641330526885814}
+  - component: {fileID: -773275975079053999}
   m_Layer: 0
   m_Name: FX_LightningNovaBlue
   m_TagString: Untagged
@@ -9877,7 +9877,7 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!114 &-1558641330526885814
+--- !u!114 &-773275975079053999
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9886,10 +9886,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 9021214231623669452}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 801429754fb26114f8584e6b2bd11969, type: 3}
+  m_Script: {fileID: 11500000, guid: 878da4bbada592044bb42dad41f1cec4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SKILL_TYPE: 9
+  SKILL_TYPE: 0
   layerMask:
     serializedVersion: 2
     m_Bits: 512

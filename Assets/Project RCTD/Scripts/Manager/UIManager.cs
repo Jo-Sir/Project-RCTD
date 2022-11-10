@@ -50,5 +50,9 @@ public class UIManager : Singleton<UIManager>
 
         }
     }
+    public void TowerInfoUpdate()
+    {
+        uIController.InfoTextUpdate();
+    }
     #endregion Funcs
 }

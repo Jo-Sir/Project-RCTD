@@ -9,7 +9,7 @@ public class Creep : MonoBehaviour, IDamagable
 {
     #region SerializeFields
     [SerializeField] private ROUND_TYPE ROUND_TYPE;
-    [SerializeField] private float baseHp = 40f;
+    [SerializeField] private float baseHp;
     [SerializeField] private float moveSpeed;
     [SerializeField] private PathsData pathsData;
     #endregion SerializeFields
@@ -21,6 +21,7 @@ public class Creep : MonoBehaviour, IDamagable
     private Transform paths;
     private List<Transform> tragetTransform;
     private NavMeshAgent agent;
+    private IEnumerator SetDeBuffTimeCo;
     private float colseDistance = 1f;
     private int listCount = 0;
     private Material material;
@@ -37,11 +38,41 @@ public class Creep : MonoBehaviour, IDamagable
             curHp = value;
             if (creepUIController.changeHpBar == null) return;
             creepUIController.changeHpBar.Invoke(curHp);
-            if (curHp <= 0) { Die(); }
+            if (curHp <= 0) 
+            {
+                if (!isDie)
+                {
+                    switch (ROUND_TYPE)
+                    {
+                        case ROUND_TYPE.MISSION_ONE:
+                            GameManager.Instance.Gold += 200;
+                            break;
+                        case ROUND_TYPE.MISSION_TWO:
+                            GameManager.Instance.Gold += 400;
+                            break;
+                        case ROUND_TYPE.MISSION_THREE:
+                            GameManager.Instance.Gold += 800;
+                            break;
+                    }
+                }
+                Die(); 
+            }
         }
         get 
         { 
             return curHp;
+        }
+    }
+    public float MoveSpeed 
+    {
+        set
+        {
+            moveSpeed = value;
+            agent.speed = moveSpeed;
+        }
+        get
+        {
+            return moveSpeed;
         }
     }
     public bool IsDie { get => isDie; }
@@ -72,7 +103,21 @@ public class Creep : MonoBehaviour, IDamagable
         if (other.name == "GoalTile")
         {
             Die();
-            GameManager.Instance.Life -= 1;
+            switch (ROUND_TYPE)
+            {
+                case ROUND_TYPE.MISSION_ONE:
+                    GameManager.Instance.Life -= 5;
+                    break;
+                case ROUND_TYPE.MISSION_TWO:
+                    GameManager.Instance.Life -= 5;
+                    break;
+                case ROUND_TYPE.MISSION_THREE:
+                    GameManager.Instance.Life -= 5;
+                    break;
+                default:
+                    GameManager.Instance.Life -= 1;
+                    break;
+            }
         }
     }
     private void OnEnable()
@@ -120,17 +165,24 @@ public class Creep : MonoBehaviour, IDamagable
         if (isDie) { return; }
         StartCoroutine(SetDissolveAmount());
     }
-    // 페스를 하나만 사용하는 방법은 몬스터가 순차적으로 나오면 뒤에나오는 몬스터의 페스 설정이 뒤죽박죽이 된다
-    // 몬스터가 한마리가 아니라면 사용할 수 없는 방법이였다
-    /*public void RePath()
+    public void SetDeBuff(DEBUFF_TYPE deBuffname, float deBuffTime, float figure)
     {
-        if (Physics.Raycast(transform.position, -transform.right, out hit, Mathf.Infinity, 1 << 7 | 1 << 10))
+        switch (deBuffname)
         {
-            tragetTransform.position = hit.transform.position;
-            agent.SetDestination(tragetTransform.position);
+            case DEBUFF_TYPE.SLOW:
+                MoveSpeed -= figure;
+                if (SetDeBuffTimeCo == null) 
+                {
+                    SetDeBuffTimeCo = SetDeBuffTime(deBuffname, deBuffTime, figure);
+                }
+                StartCoroutine(SetDeBuffTimeCo);
+                break;
+            default:
+                return;
         }
-    }*/
+    }
     #endregion Funcs
+
     #region IEnumerator
     IEnumerator SetDissolveAmount()
     {
@@ -145,5 +197,19 @@ public class Creep : MonoBehaviour, IDamagable
         }
         GameManager.Instance.ObjectReturn(ROUND_TYPE, this.gameObject);
     }
+
+    IEnumerator SetDeBuffTime(DEBUFF_TYPE deBuffname, float deBuffTime, float figure)
+    {
+        yield return new WaitForSeconds(deBuffTime);
+        switch (deBuffname)
+        {
+            case DEBUFF_TYPE.SLOW:
+                MoveSpeed += figure;
+                break;
+            default:
+                break;
+        }
+        SetDeBuffTimeCo = null;
+    }    
     #endregion
 }

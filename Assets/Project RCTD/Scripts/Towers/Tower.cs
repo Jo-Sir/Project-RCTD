@@ -36,7 +36,6 @@ public abstract class Tower : MonoBehaviour, IHasColorTYPE
 
     #region Funcs
 
-    public abstract void SetCOLOR_TYPE();
     protected virtual void SetPrice()
     {
         switch (TOWER_TYPE)
@@ -63,6 +62,7 @@ public abstract class Tower : MonoBehaviour, IHasColorTYPE
                 break;
         }
     }
+    public abstract void SetCOLOR_TYPE();
     #endregion Funcs
 
 
