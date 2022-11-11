@@ -39,7 +39,7 @@ public class GameManager : Singleton<GameManager>
         {
             wave = value;
             UIManager.Instance.TextUpdate("curWave", wave.ToString());
-            if(wave != 1) Gold += 200;
+            if(wave != 1) Gold += 400;
         }
         get => wave;
     }

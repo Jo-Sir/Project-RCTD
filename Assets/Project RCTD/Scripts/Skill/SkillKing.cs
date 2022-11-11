@@ -12,7 +12,7 @@ public class SkillKing : AttackSkill
         {
             foreach (Collider target in targets)
             {
-                target.GetComponent<Creep>().SetDeBuff(DEBUFF_TYPE.SLOW, 2f, 1.5f);
+                target.GetComponent<Creep>().SetDeBuff(DEBUFF_TYPE.SLOW, 3f, 1.5f);
                 target.GetComponent<IDamagable>().TakeHit(totalAtk);
             }
         }

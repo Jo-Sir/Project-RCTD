@@ -52,18 +52,26 @@ public class UIController : MonoBehaviour
         clickTile.SetActive(true);
         clickTower.SetActive(false);
         clickGround.SetActive(false);
+        clickMission.SetActive(false);
+        clickUpgrade.SetActive(false);
+        clickInfo.SetActive(false);
     }
     public void SetActiveClickTowerUI()
     {
         clickTower.SetActive(true);
         clickTile.SetActive(false);
         clickGround.SetActive(false);
+        clickMission.SetActive(false);
+        clickUpgrade.SetActive(false);
     }
     public void SetActiveClickGroundUI()
     {
         clickGround.SetActive(true);
         clickTower.SetActive(false);
         clickTile.SetActive(false);
+        clickMission.SetActive(false);
+        clickUpgrade.SetActive(false);
+        clickInfo.SetActive(false);
     }
     public void CurWaveTextUpdate(string curWaveText)
     {
@@ -169,12 +177,14 @@ public class UIController : MonoBehaviour
         switch (cOLOR_TYPE)
         {
             case COLOR_TYPE.BLACK:
+                if (GameManager.Instance.Gold < upgradeBlackPrice) return;
                 GameManager.Instance.UpgradeBlackLV += 1;
                 GameManager.Instance.Gold -= upgradeBlackPrice;
                 upgradeBlackPrice += 10;
                 UpgradeTextUpdate(cOLOR_TYPE);
                 break;
             case COLOR_TYPE.WHITE:
+                if (GameManager.Instance.Gold < upgradeWhitePrice) return;
                 GameManager.Instance.UpgradeWhiteLV += 1;
                 GameManager.Instance.Gold -= upgradeWhitePrice;
                 upgradeWhitePrice +=10;
@@ -198,7 +208,7 @@ public class UIController : MonoBehaviour
                 buttonMissionThree.interactable = false;
                 break;
         }
-        yield return new WaitForSeconds(20);
+        yield return new WaitForSeconds(180f);
         switch (step)
         {
             case 1:

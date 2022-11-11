@@ -16,7 +16,7 @@ public abstract class AttackTower : Tower, IAttackable
     protected float curAS;
     protected float upgrade = 0;
     protected bool isAttack = false;
-    protected float skillProbability = 1f;
+    protected float skillProbability = 5f;
     #endregion Fields
 
     #region Properties
@@ -59,6 +59,11 @@ public abstract class AttackTower : Tower, IAttackable
     {
         if (isAttack == false && DetectTarget())
         { Attack(); }
+    }
+    private void OnEnable()
+    {
+        target = null;
+        isAttack = false;
     }
     #endregion
 
@@ -121,7 +126,7 @@ public abstract class AttackTower : Tower, IAttackable
     protected virtual IEnumerator AttackCool(float baseAS)
     {
         isAttack = true;
-        yield return new WaitForSeconds(baseAS);
+        yield return new WaitForSeconds(CurAS);
         isAttack = false;
     }
     protected virtual IEnumerator SkillCollTime()

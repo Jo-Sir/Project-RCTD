@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7330529779248560590}
   - component: {fileID: 1077091552416750630}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: TriggerCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,7 +56,7 @@ GameObject:
   - component: {fileID: 8078128100886017250}
   - component: {fileID: 3726065162171784111}
   - component: {fileID: 6685316506025927056}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: LightningRing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4994,7 +4994,7 @@ GameObject:
   - component: {fileID: 9191207276800803482}
   - component: {fileID: 9220118435716768090}
   - component: {fileID: -773275975079053999}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: FX_LightningNovaBlue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9907,7 +9907,7 @@ GameObject:
   - component: {fileID: 9016804557502944642}
   - component: {fileID: 9219683657879198910}
   - component: {fileID: 9219251084199086466}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: CenterWhite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14798,7 +14798,7 @@ GameObject:
   - component: {fileID: 9024528160915275932}
   - component: {fileID: 9219041170065252390}
   - component: {fileID: 9220626276153118620}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: CenterGlow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19734,7 +19734,7 @@ GameObject:
   - component: {fileID: 9024463067539983630}
   - component: {fileID: 9218904345611046584}
   - component: {fileID: 9219241111902876906}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: VerticalGlowRing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24616,7 +24616,7 @@ GameObject:
   - component: {fileID: 9024535501787500454}
   - component: {fileID: 9219143094399379516}
   - component: {fileID: 9221085523398467524}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: HorizontalGlowRing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29543,7 +29543,7 @@ GameObject:
   - component: {fileID: 9016845646261516934}
   - component: {fileID: 9219002443000795744}
   - component: {fileID: 9221091689716375668}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: CenterSphereGlow
   m_TagString: Untagged
   m_Icon: {fileID: 0}

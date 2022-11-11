@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5935815891226303288}
   - component: {fileID: 3326194201791330154}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: TriggerCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,7 +56,7 @@ GameObject:
   - component: {fileID: 847193616230576166}
   - component: {fileID: 653076262719463312}
   - component: {fileID: 653930965553755672}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: GroundContact
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4966,7 +4966,7 @@ GameObject:
   - component: {fileID: 855435940077136056}
   - component: {fileID: 653116710612114428}
   - component: {fileID: 654291743738256402}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Glow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9902,7 +9902,7 @@ GameObject:
   - component: {fileID: 855207649677736716}
   - component: {fileID: 653030274034543698}
   - component: {fileID: 654467824337937966}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Arcs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14840,7 +14840,7 @@ GameObject:
   - component: {fileID: 653369318992174772}
   - component: {fileID: 654260193964173338}
   - component: {fileID: -1753957287058918624}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: FX_LightningTornado
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19778,7 +19778,7 @@ GameObject:
   - component: {fileID: 855538539080743978}
   - component: {fileID: 653143200586660530}
   - component: {fileID: 654967390843707768}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: SmokeCircle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24669,7 +24669,7 @@ GameObject:
   - component: {fileID: 846815019852878144}
   - component: {fileID: 653296157765670560}
   - component: {fileID: 654859869036867712}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Cyclone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29605,7 +29605,7 @@ GameObject:
   - component: {fileID: 846843236848471198}
   - component: {fileID: 653493764776863382}
   - component: {fileID: 654185458012503892}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Sparks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34496,7 +34496,7 @@ GameObject:
   - component: {fileID: 847135363908910838}
   - component: {fileID: 653724896947322906}
   - component: {fileID: 654899903008698338}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Electricity
   m_TagString: Untagged
   m_Icon: {fileID: 0}

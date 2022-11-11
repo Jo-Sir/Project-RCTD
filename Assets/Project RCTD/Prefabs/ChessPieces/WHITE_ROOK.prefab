@@ -103,9 +103,9 @@ MonoBehaviour:
   SKILL_TYPE: 3
   atkAbleRange: 6
   projectilesRange: 2
-  coolTime: 20
-  baseATK: 30
-  baseAS: 2
+  coolTime: 0
+  baseATK: 60
+  baseAS: 1.2
   target: {fileID: 0}
   targetLayerMask:
     serializedVersion: 2

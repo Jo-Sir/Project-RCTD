@@ -10,12 +10,13 @@ public class Creep : MonoBehaviour, IDamagable
     #region SerializeFields
     [SerializeField] private ROUND_TYPE ROUND_TYPE;
     [SerializeField] private float baseHp;
-    [SerializeField] private float moveSpeed;
+    [SerializeField] private float baseMoveSpeed;
     [SerializeField] private PathsData pathsData;
     #endregion SerializeFields
 
     #region Fields
-    [SerializeField] private float curHp;
+    private float curHp;
+    private float curMoveSpeed;
     private CreepUIController creepUIController;
     private float hp;
     private Transform paths;
@@ -27,6 +28,7 @@ public class Creep : MonoBehaviour, IDamagable
     private Material material;
     private CapsuleCollider colledr;
     private bool isDie;
+    private Animator animator;
     #endregion Fields
 
     #region Properties
@@ -63,16 +65,20 @@ public class Creep : MonoBehaviour, IDamagable
             return curHp;
         }
     }
-    public float MoveSpeed 
+    public float CurMoveSpeed 
     {
         set
         {
-            moveSpeed = value;
-            agent.speed = moveSpeed;
+            curMoveSpeed = value;
+            if (curMoveSpeed < 0.5f)
+            {
+                curMoveSpeed = 0.5f;
+            }
+            agent.speed = curMoveSpeed;
         }
         get
         {
-            return moveSpeed;
+            return curMoveSpeed;
         }
     }
     public bool IsDie { get => isDie; }
@@ -81,6 +87,7 @@ public class Creep : MonoBehaviour, IDamagable
     #region UnityEngines
     private void Awake()
     {
+        animator = GetComponent<Animator>();
         colledr = GetComponent<CapsuleCollider>();
         paths = pathsData.paths;
         agent = GetComponent<NavMeshAgent>();
@@ -114,6 +121,15 @@ public class Creep : MonoBehaviour, IDamagable
                 case ROUND_TYPE.MISSION_THREE:
                     GameManager.Instance.Life -= 5;
                     break;
+                case ROUND_TYPE.ROUND_FIVE:
+                    GameManager.Instance.Life -= 5;
+                    break;
+                case ROUND_TYPE.ROUND_TEN:
+                    GameManager.Instance.Life -= 5;
+                    break;
+                case ROUND_TYPE.ROUND_FIFTEEN:
+                    GameManager.Instance.Life -= 5;
+                    break;
                 default:
                     GameManager.Instance.Life -= 1;
                     break;
@@ -129,7 +145,7 @@ public class Creep : MonoBehaviour, IDamagable
         hp = baseHp;
         isDie = false;
         SetHP();
-        agent.speed = moveSpeed;
+        agent.speed = baseMoveSpeed;
         agent.isStopped = false;
         agent.destination = tragetTransform[listCount].position;
         material.SetFloat("_DissolveAmount", 0);
@@ -143,7 +159,10 @@ public class Creep : MonoBehaviour, IDamagable
         if (GameManager.Instance.Wave >= 5) hp *= 2f;
         if (GameManager.Instance.Wave >= 10) hp *= 2f;
         if (GameManager.Instance.Wave >= 15) hp *= 2f;
-        CurHp = hp * GameManager.Instance.Wave;
+        if (GameManager.Instance.Wave <= 0)
+        { CurHp = hp * 1; }
+        else { CurHp = hp * GameManager.Instance.Wave; }
+        
     }
     public void TakeHit(float damage)
     {
@@ -163,6 +182,7 @@ public class Creep : MonoBehaviour, IDamagable
     public void Die()
     {
         if (isDie) { return; }
+        animator.Play("Die");
         StartCoroutine(SetDissolveAmount());
     }
     public void SetDeBuff(DEBUFF_TYPE deBuffname, float deBuffTime, float figure)
@@ -170,11 +190,11 @@ public class Creep : MonoBehaviour, IDamagable
         switch (deBuffname)
         {
             case DEBUFF_TYPE.SLOW:
-                MoveSpeed -= figure;
                 if (SetDeBuffTimeCo == null) 
                 {
                     SetDeBuffTimeCo = SetDeBuffTime(deBuffname, deBuffTime, figure);
                 }
+                CurMoveSpeed -= figure;
                 StartCoroutine(SetDeBuffTimeCo);
                 break;
             default:
@@ -204,7 +224,7 @@ public class Creep : MonoBehaviour, IDamagable
         switch (deBuffname)
         {
             case DEBUFF_TYPE.SLOW:
-                MoveSpeed += figure;
+                CurMoveSpeed = baseMoveSpeed;
                 break;
             default:
                 break;

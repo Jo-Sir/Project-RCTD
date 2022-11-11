@@ -19,7 +19,7 @@ public class StageController : MonoBehaviour
     private void Awake()
     {
         time = 10f;
-        GameManager.Instance.Gold = 10000;
+        GameManager.Instance.Gold = 800;
         UIManager.Instance.TextUpdate("curWave", curWave.ToString());
         ObjectPoolManager.Instance.Init();
         WaveTimer();

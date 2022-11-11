@@ -1,5 +1,50 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &863999397458108367
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6985714377094329912}
+  - component: {fileID: 3082492068458421892}
+  m_Layer: 12
+  m_Name: TriggerCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6985714377094329912
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 863999397458108367}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 3.333333, y: 3.3333323, z: 3.3333323}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4505251104040806146}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &3082492068458421892
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 863999397458108367}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4508330235588274254
 GameObject:
   m_ObjectHideFlags: 0
@@ -11,7 +56,7 @@ GameObject:
   - component: {fileID: 4511404320267445956}
   - component: {fileID: 4335548019134840862}
   - component: {fileID: 4347770804653849810}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: EmberStart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4902,7 +4947,7 @@ GameObject:
   - component: {fileID: 4505286416563926658}
   - component: {fileID: 4347652622990266586}
   - component: {fileID: 4347860742237627020}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: SpikeWave3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9806,7 +9851,7 @@ GameObject:
   - component: {fileID: 4511370398033405268}
   - component: {fileID: 4347404893785269306}
   - component: {fileID: 4346526878503162276}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: EmberStart2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14697,7 +14742,7 @@ GameObject:
   - component: {fileID: 4511343640772500478}
   - component: {fileID: 4347290805545810638}
   - component: {fileID: 4346947800084311722}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Shockwave
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19579,7 +19624,7 @@ GameObject:
   - component: {fileID: 4505038164276392226}
   - component: {fileID: 4348028258016928730}
   - component: {fileID: 4346474184262271162}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: SpikeWave2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24484,7 +24529,7 @@ GameObject:
   - component: {fileID: 4347600320371850186}
   - component: {fileID: 4347879725488876122}
   - component: {fileID: -994884572854944029}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: FX_SpikeWaveSapphire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24500,7 +24545,7 @@ Transform:
   m_GameObject: {fileID: 4509118318978874838}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4511404320267445956}
@@ -24508,6 +24553,7 @@ Transform:
   - {fileID: 4511343640772500478}
   - {fileID: 4505038164276392226}
   - {fileID: 4505286416563926658}
+  - {fileID: 6985714377094329912}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -24521,7 +24567,7 @@ ParticleSystem:
   serializedVersion: 8
   lengthInSec: 4
   simulationSpeed: 1
-  stopAction: 0
+  stopAction: 3
   cullingMode: 3
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
@@ -28362,21 +28408,16 @@ ParticleSystem:
     collidesWithDynamic: 1
     interiorCollisions: 0
   TriggerModule:
-    enabled: 0
+    enabled: 1
     serializedVersion: 2
-    inside: 1
+    inside: 0
     outside: 0
-    enter: 0
+    enter: 2
     exit: 0
     colliderQueryMode: 0
     radiusScale: 1
     primitives:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
+    - {fileID: 3082492068458421892}
   SubModule:
     serializedVersion: 2
     enabled: 0

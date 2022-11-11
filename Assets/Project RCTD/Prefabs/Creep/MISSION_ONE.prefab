@@ -730,7 +730,7 @@ Animator:
   m_GameObject: {fileID: 5799706400698006175}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: bfe92606348df634fb607686bbb0ca33, type: 3}
-  m_Controller: {fileID: 9100000, guid: b890e9245b20c344b9076194f293927f, type: 2}
+  m_Controller: {fileID: 22100000, guid: 3e86eca36c3f6384baf062e75728c7db, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -751,7 +751,7 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 3.5
-  m_Acceleration: 8
+  m_Acceleration: 20
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 0
@@ -761,7 +761,7 @@ NavMeshAgent:
   m_Height: 2
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 0
 --- !u!114 &-765220124158065899
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -775,10 +775,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ROUND_TYPE: 15
-  baseHp: 1000
-  moveSpeed: 3.5
+  baseHp: 300
+  baseMoveSpeed: 3.5
   pathsData: {fileID: 11400000, guid: 039c7dfcab7301648adf899ce923ec93, type: 2}
-  curHp: 0
 --- !u!136 &4401455836697369276
 CapsuleCollider:
   m_ObjectHideFlags: 0

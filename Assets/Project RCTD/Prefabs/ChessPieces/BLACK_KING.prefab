@@ -103,8 +103,8 @@ MonoBehaviour:
   SKILL_TYPE: 8
   atkAbleRange: 3
   projectilesRange: 3
-  coolTime: 2
-  baseATK: 200
+  coolTime: 0
+  baseATK: 75
   baseAS: 0.5
   target: {fileID: 0}
   targetLayerMask:

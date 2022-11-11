@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6645742856947108527}
   - component: {fileID: 2788104161316828394}
   - component: {fileID: 2320278208105308009}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Dust
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4903,7 +4903,7 @@ GameObject:
   - component: {fileID: 678754126172203020}
   - component: {fileID: 7771451982482908772}
   - component: {fileID: -6464887936516231286}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: FX_SlashWidePurple
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9800,7 +9800,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8241109589506758108}
   - component: {fileID: 2136862129118963215}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: TriggerCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}

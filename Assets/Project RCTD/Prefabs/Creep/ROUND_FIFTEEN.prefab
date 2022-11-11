@@ -561,7 +561,7 @@ Animator:
   m_GameObject: {fileID: 8281421452338314565}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 901f07a46fb9f4a41b4af110da172408, type: 3}
-  m_Controller: {fileID: 9100000, guid: 62ef73ca3b7fb704da5aaa510c4f6bbb, type: 2}
+  m_Controller: {fileID: 22100000, guid: 41ac911600b826849bde3b3dc9ce6abd, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -606,10 +606,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ROUND_TYPE: 14
-  baseHp: 100
-  moveSpeed: 3.5
+  baseHp: 500
+  baseMoveSpeed: 3.5
   pathsData: {fileID: 11400000, guid: 039c7dfcab7301648adf899ce923ec93, type: 2}
-  curHp: 0
 --- !u!136 &5026979954337474035
 CapsuleCollider:
   m_ObjectHideFlags: 0

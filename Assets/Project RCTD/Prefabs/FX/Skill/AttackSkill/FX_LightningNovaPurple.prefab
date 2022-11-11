@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6792730372763398017}
   - component: {fileID: 6074813734904415749}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: TriggerCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,7 +56,7 @@ GameObject:
   - component: {fileID: 8488275803725458190}
   - component: {fileID: 3918848479459607619}
   - component: {fileID: 6417678513155554940}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: LightningRing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4993,7 +4993,7 @@ GameObject:
   - component: {fileID: 8715989461118346602}
   - component: {fileID: 8802099153824206220}
   - component: {fileID: 8800255097128484760}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: CenterSphereGlow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9875,7 +9875,7 @@ GameObject:
   - component: {fileID: 8712979092854673482}
   - component: {fileID: 8802240010554947536}
   - component: {fileID: 8800261297671864360}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: HorizontalGlowRing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14802,7 +14802,7 @@ GameObject:
   - component: {fileID: 8715926061913082478}
   - component: {fileID: 8801663266270806866}
   - component: {fileID: 8801849412979676782}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: CenterWhite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19693,7 +19693,7 @@ GameObject:
   - component: {fileID: 8712987431100309360}
   - component: {fileID: 8802200202174857162}
   - component: {fileID: 8800334753909526640}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: CenterGlow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24629,7 +24629,7 @@ GameObject:
   - component: {fileID: 8712910790688658146}
   - component: {fileID: 8802021328145322324}
   - component: {fileID: 8801860621287418630}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: VerticalGlowRing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29512,7 +29512,7 @@ GameObject:
   - component: {fileID: 8816523296557407606}
   - component: {fileID: 8800983332773805750}
   - component: {fileID: -7150457558299208796}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: FX_LightningNovaPurple
   m_TagString: Untagged
   m_Icon: {fileID: 0}

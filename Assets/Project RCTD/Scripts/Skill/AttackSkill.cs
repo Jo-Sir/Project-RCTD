@@ -16,7 +16,6 @@ public class AttackSkill : Skill
     public override void SKillSetting(float towerAtk)
     {
         totalAtk = (baseSkillAtk + (towerAtk * (skillCoefficient * 0.01f)));
-        Debug.Log("totalAtk : " + totalAtk.ToString()); ;
     }
 
     protected override void Use()

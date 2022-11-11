@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 234008289723875336}
   - component: {fileID: 139624422860490106}
   - component: {fileID: 140766865836799434}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Main
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5044,7 +5044,7 @@ GameObject:
   - component: {fileID: 225620725117338524}
   - component: {fileID: 112434544307503134}
   - component: {fileID: 141001148786277496}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Ember
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9927,7 +9927,7 @@ GameObject:
   - component: {fileID: 2460189035472839557}
   - component: {fileID: 2996155494584023819}
   - component: {fileID: 3490676047981348107}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: FX_CleaveGeneric
   m_TagString: Untagged
   m_Icon: {fileID: 0}

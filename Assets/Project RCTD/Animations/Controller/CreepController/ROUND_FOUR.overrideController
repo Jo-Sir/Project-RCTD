@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ROUND_FOUR
+  m_Controller: {fileID: 9100000, guid: c709bdb821a8fd144b64dc4dfc896ac0, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 1827226128182048838, guid: 4518653cacfc52447b899f8095c84c71, type: 3}
+    m_OverrideClip: {fileID: 7400000, guid: 55a18a659f6f9f944be505322ca9924d, type: 3}
+  - m_OriginalClip: {fileID: 1827226128182048838, guid: 472b879a56f310c4c8404bee1d37033a, type: 3}
+    m_OverrideClip: {fileID: 7400000, guid: 47bbcf7025516824586a71c6f07bc9f8, type: 3}
+  - m_OriginalClip: {fileID: 1827226128182048838, guid: 20f2d4307655968458990cce0ccba8e7, type: 3}
+    m_OverrideClip: {fileID: 7400000, guid: f9eb934cdbb9074419c53e3af6922fb2, type: 3}
