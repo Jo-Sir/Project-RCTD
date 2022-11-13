@@ -11,11 +11,12 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
     #endregion Fields
 
     #region UnityEngines
-    private void Awake()
+    private new void Awake()
     {
+        base.Awake();
         if (objectDatas == null)
         {
-            ObjectDatas datas = GameObject.Find("ObjectDatas").GetComponent<ObjectDatas>();
+            ObjectDatas datas = Resources.Load<ObjectDatas>("Prefabs/Data/ObjectDatas").GetComponent<ObjectDatas>();
             objectDatas = datas.Datas;
         }
         // Init();

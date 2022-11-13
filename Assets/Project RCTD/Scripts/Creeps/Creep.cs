@@ -17,18 +17,19 @@ public class Creep : MonoBehaviour, IDamagable
     #region Fields
     private float curHp;
     private float curMoveSpeed;
-    private CreepUIController creepUIController;
     private float hp;
-    private Transform paths;
-    private List<Transform> tragetTransform;
-    private NavMeshAgent agent;
-    private IEnumerator SetDeBuffTimeCo;
     private float colseDistance = 1f;
     private int listCount = 0;
-    private Material material;
-    private CapsuleCollider colledr;
     private bool isDie;
+    private Transform paths;
+    private NavMeshAgent agent;
+    private Material material;
     private Animator animator;
+    private AudioSource audioSource;
+    private List<Transform> tragetTransform;
+    private CreepUIController creepUIController;
+    private CapsuleCollider colledr;
+    private IEnumerator SetDeBuffTimeCo;
     #endregion Fields
 
     #region Properties
@@ -122,13 +123,13 @@ public class Creep : MonoBehaviour, IDamagable
                     GameManager.Instance.Life -= 5;
                     break;
                 case ROUND_TYPE.ROUND_FIVE:
-                    GameManager.Instance.Life -= 5;
+                    GameManager.Instance.Life -= 10;
                     break;
                 case ROUND_TYPE.ROUND_TEN:
-                    GameManager.Instance.Life -= 5;
+                    GameManager.Instance.Life -= 10;
                     break;
                 case ROUND_TYPE.ROUND_FIFTEEN:
-                    GameManager.Instance.Life -= 5;
+                    GameManager.Instance.Life -= 10;
                     break;
                 default:
                     GameManager.Instance.Life -= 1;
@@ -182,6 +183,7 @@ public class Creep : MonoBehaviour, IDamagable
     public void Die()
     {
         if (isDie) { return; }
+        // audioSource.Play();
         animator.Play("Die");
         StartCoroutine(SetDissolveAmount());
     }

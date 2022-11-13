@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
- 
+using UnityEngine.SceneManagement;
+
 public class GameManager : Singleton<GameManager>
 {
     #region Fields
@@ -11,6 +12,7 @@ public class GameManager : Singleton<GameManager>
     private int life;
     private int upgradeBlackLV;
     private int upgradeWhiteLV;
+    private FadeController fadeController = null;
     #endregion Fields
 
     #region Properties
@@ -20,7 +22,7 @@ public class GameManager : Singleton<GameManager>
         {
             life = value;
             UIManager.Instance.TextUpdate("life", life.ToString());
-            //if (life == 0) Debug.Log("게임종료");
+            if (life == 0) Debug.Log("게임종료");
         }
         get => life;
     }
@@ -48,16 +50,36 @@ public class GameManager : Singleton<GameManager>
     #endregion
 
     #region UnityEngines
-    private void Awake()
+    private new void Awake()
     {
-        // 씬 넘어갔을때 초기화 해주기
-        gold = 400;
-        wave = 0;
-        life = 10;
+        base.Awake();
+        if (fadeController == null)
+        {
+            Instantiate(Resources.Load<GameObject>("Prefabs/Controller/Fade"));
+            fadeController = GameObject.Find("Fade(Clone)").GetComponent<FadeController>();
+        }
+        AudioManager.Instance.AoudioMuteControl("Master", false);
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
     #endregion UnityEngines
 
     #region Funcs
+    public void Init()
+    {
+        ObjectPoolManager.Instance.Init();
+    }
+    public void GameStart()
+    {
+        gold = 400;
+        wave = 0;
+        life = 10;
+        StartCoroutine(FadeOutTerm("GameScenes"));
+    }
+    public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        StartCoroutine(FadeInTerm());
+
+    }
     public GameObject ObjectGet(Enum key, Transform parentTransform)
     {
         return ObjectPoolManager.Instance.GetObject(key.ToString(), parentTransform);
@@ -66,5 +88,23 @@ public class GameManager : Singleton<GameManager>
     {
         ObjectPoolManager.Instance.ReturnObject(key.ToString(), obj);
     }
-    #endregion Funcs
+    #endregion
+    #region IEnumerator
+    IEnumerator FadeOutTerm(string scenesName)
+    {
+        fadeController.FadeImageSetActive(true);
+        fadeController.FadeOut();
+        yield return new WaitForSeconds(1f);
+        if (scenesName != null)
+        {
+            SceneManager.LoadScene(scenesName);
+        }
+    }
+    IEnumerator FadeInTerm()
+    {
+        fadeController.FadeIn();
+        yield return new WaitForSeconds(1f);
+        fadeController.FadeImageSetActive(false);
+    }
+    #endregion
 }

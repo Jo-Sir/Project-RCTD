@@ -30,7 +30,7 @@ public class SkillTornado : AttackSkill
 
     IEnumerator TornadoAttack()
     {
-        for (float i = 0; i < 3; i+=0.01f)
+        for (float i = 0; i < (1.5f/Time.timeScale); i+=0.01f)
         {
             Collider[] targets = Physics.OverlapSphere(transform.position, range, layerMask);
             if (targets.Length > 0)

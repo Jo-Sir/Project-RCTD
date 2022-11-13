@@ -26,6 +26,7 @@ public class UIController : MonoBehaviour
     [SerializeField] private GameObject clickMission;
     [SerializeField] private GameObject clickUpgrade;
     [SerializeField] private GameObject clickInfo;
+    [SerializeField] private GameObject clickOption;
     [SerializeField] private Button buttonMissionOne;
     [SerializeField] private Button buttonMissionTwo;
     [SerializeField] private Button buttonMissionThree;
@@ -72,6 +73,12 @@ public class UIController : MonoBehaviour
         clickMission.SetActive(false);
         clickUpgrade.SetActive(false);
         clickInfo.SetActive(false);
+    }
+    public void SetActiveClickOptionUI()
+    {
+        UIManager.Instance.PreTimeScale = Time.timeScale;
+        Time.timeScale = 0f;
+        clickOption.SetActive(true);
     }
     public void CurWaveTextUpdate(string curWaveText)
     {
@@ -194,6 +201,8 @@ public class UIController : MonoBehaviour
 
     }
     #endregion Funcs
+
+    #region IEnumerator
     IEnumerator MissionCooltime(int step)
     {
         switch (step)
@@ -222,4 +231,5 @@ public class UIController : MonoBehaviour
                 break;
         }
     }
+    #endregion
 }

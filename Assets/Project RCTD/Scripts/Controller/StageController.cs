@@ -21,7 +21,6 @@ public class StageController : MonoBehaviour
         time = 10f;
         GameManager.Instance.Gold = 800;
         UIManager.Instance.TextUpdate("curWave", curWave.ToString());
-        ObjectPoolManager.Instance.Init();
         WaveTimer();
     }
     private void Update()

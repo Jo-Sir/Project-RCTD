@@ -6,11 +6,17 @@ public class UIManager : Singleton<UIManager>
 {
     #region Fields
     private UIController uIController;
+    private float preTimeScale;
     #endregion Fields
 
+    #region Proprety
+    public float PreTimeScale { set => preTimeScale = value; get => preTimeScale; }
+    #endregion
+
     #region UnityEngines
-    private void Awake()
+    private new void Awake()
     {
+        base.Awake();
         if (uIController == null)
         {
             uIController = GameObject.Find("UIController").GetComponent<UIController>();
