@@ -11,18 +11,20 @@ public class TowerController : MonoBehaviour
     private RaycastHit hit;
     private Tower curTower = null;
     private IBuildable curTile = null;
+    private IEnumerator interactionCo;
     #endregion Fields
 
     #region UnityEngines
-    private void Update()
+    private void Awake()
     {
-        Interaction();
+        interactionCo = InteractionCo();
+        StartCoroutine(interactionCo);
     }
     #endregion UnityEngines
 
     #region Property
     public Tower CurTower
-    { 
+    {
         get => curTower;
     }
     #endregion
@@ -33,32 +35,29 @@ public class TowerController : MonoBehaviour
     /// </summary>
     private void Interaction()
     {
-        if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
+        if (hit.transform != null) curTile.ParticleOnOff(false); ;
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, 1 << 7))
         {
-            if (hit.transform != null) curTile.ParticleOnOff(false); ;
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity, 1 << 7))
+            if (hit.transform.GetComponent<IBuildable>() == null) return;
+            curTile = hit.transform.GetComponent<IBuildable>();
+            curTile.ParticleOnOff(true);
+            if (curTile.BuildCheck(out curTower))
             {
-                if (hit.transform.GetComponent<IBuildable>() == null) return;
-                curTile = hit.transform.GetComponent<IBuildable>();
-                curTile.ParticleOnOff(true);
-                if (curTile.BuildCheck(out curTower))
-                {
-                    UIManager.Instance.ClickTileUI();
-                }
-                else
-                {
-                    UIManager.Instance.ClickTowerUI();
-                }
-                UIManager.Instance.TowerInfoUpdate();
+                UIManager.Instance.ClickTileUI();
             }
             else
             {
-                if (curTile != null) curTile.ParticleOnOff(false);
-                curTile = null;
-                curTower = null;
-                UIManager.Instance.ClickGroundUI();
+                UIManager.Instance.ClickTowerUI();
             }
+            UIManager.Instance.TowerInfoUpdate();
+        }
+        else
+        {
+            if (curTile != null) curTile.ParticleOnOff(false);
+            curTile = null;
+            curTower = null;
+            UIManager.Instance.ClickGroundUI();
         }
     }
     /// <summary>
@@ -149,6 +148,18 @@ public class TowerController : MonoBehaviour
         return curTower;
     }
     #endregion Funcs
+
+    #region IEnumerator
+    IEnumerator InteractionCo()
+    {
+        while (GameManager.Instance.GameOver == false)
+        {
+            yield return new CustomInputTouchCo(true);
+            Interaction();
+        }
+        StopCoroutine(interactionCo);
+    }
+    #endregion 
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.black;

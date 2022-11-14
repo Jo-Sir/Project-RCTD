@@ -58,7 +58,6 @@ public class Creep : MonoBehaviour, IDamagable
                             break;
                     }
                 }
-                audioSource.Play();
                 Die(); 
             }
         }
@@ -159,9 +158,9 @@ public class Creep : MonoBehaviour, IDamagable
     #region Funcs
     public void SetHP()
     {
-        if (GameManager.Instance.Wave >= 5) hp *= 3f;
-        if (GameManager.Instance.Wave >= 10) hp *= 3f;
-        if (GameManager.Instance.Wave >= 15) hp *= 3f;
+        if (GameManager.Instance.Wave >= 5) { hp *= 3f; }
+        if (GameManager.Instance.Wave >= 10) { hp *= 3f; }
+        if (GameManager.Instance.Wave >= 15) { hp *= 3f; }
         if (GameManager.Instance.Wave <= 0)
         { CurHp = hp * 1; }
         else { CurHp = hp * GameManager.Instance.Wave; }
@@ -186,6 +185,7 @@ public class Creep : MonoBehaviour, IDamagable
     {
         if (isDie) { return; }
         animator.Play("Die");
+        audioSource.Play();
         StartCoroutine(SetDissolveAmount());
     }
     public void SetDeBuff(DEBUFF_TYPE deBuffname, float deBuffTime, float figure)

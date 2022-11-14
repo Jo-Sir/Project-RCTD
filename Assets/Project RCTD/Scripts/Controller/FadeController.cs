@@ -24,7 +24,6 @@ public class FadeController : MonoBehaviour
     public void FadeIn()
     {
         animator.Play("FadeIn");
-        
     }
     public void FadeOut()
     {
@@ -40,7 +39,7 @@ public class FadeController : MonoBehaviour
     IEnumerator StartCo()
     {
         FadeIn();
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.9f);
         FadeImageSetActive();
     }
 }

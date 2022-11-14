@@ -15,8 +15,9 @@ public abstract class Tower : MonoBehaviour, IHasColorTYPE
     #endregion SerializeFields
 
     #region Fields
-    protected bool skillCoolTimeOn = true;
     protected int price;
+    protected bool skillCoolTimeOn = true;
+    protected bool isable;
     protected Animator animator;
     #endregion Fields
 

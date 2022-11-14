@@ -17,12 +17,13 @@ public abstract class AttackTower : Tower, IAttackable
     protected float upgrade = 0;
     protected bool isAttack = false;
     protected float skillProbability = 5f;
+    protected IEnumerator attackCo;
     #endregion Fields
 
     #region Properties
     public float CurATK { get => curATK + (Upgrade * 10f); }
     public float CurAS { get => curAS; }
-    public float Upgrade 
+    public float Upgrade
     {
         get
         {
@@ -40,7 +41,7 @@ public abstract class AttackTower : Tower, IAttackable
     }
     public float SkillProbability
     {
-        get 
+        get
         {
             if (skillProbability <= 100)
             {
@@ -52,18 +53,25 @@ public abstract class AttackTower : Tower, IAttackable
             }
         }
     }
+    public bool IsAttackable => (bool)(isAttack == false && DetectTarget());
     #endregion Properties
 
     #region UnityEngine
-    private void Update()
+    private new void Awake()
     {
-        if (isAttack == false && DetectTarget())
-        { Attack(); }
+        base.Awake();
+        attackCo = AttackCo();
     }
     private void OnEnable()
     {
+        isable = true;
         target = null;
         isAttack = false;
+        StartCoroutine(attackCo);
+    }
+    private void OnDisable()
+    {
+        isable = false;
     }
     #endregion
 
@@ -124,6 +132,16 @@ public abstract class AttackTower : Tower, IAttackable
     #endregion
 
     #region IEnumerators
+    protected IEnumerator AttackCo()
+    {
+        while (isable)
+        { 
+            yield return new CustomIsAttackableCo(this);
+            if (IsAttackable == false){ continue;}
+            Attack();
+        }
+        StopCoroutine(attackCo);
+    }
     protected virtual IEnumerator AttackCool(float CurAS)
     {
         isAttack = true;

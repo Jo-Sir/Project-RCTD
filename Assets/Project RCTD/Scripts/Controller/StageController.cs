@@ -61,7 +61,6 @@ public class StageController : MonoBehaviour
     {
         if (curWave == 16)
         {
-
             GameManager.Instance.GameResult(true);
             return;
         }

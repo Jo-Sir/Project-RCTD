@@ -19,6 +19,8 @@ public class Projectiles : MonoBehaviour
     private LayerMask targetLayerMask;
     #endregion Fields
 
+    #region Property
+    #endregion
     #region UnityEngines
     void Update()
     {
@@ -28,10 +30,14 @@ public class Projectiles : MonoBehaviour
     {
         StartCoroutine(LifeTime());
     }
+    private void OnDisable()
+    {
+        target = null;
+    }
     #endregion UnityEngines
 
     #region Funcs
-    private void Launch()
+    public void Launch()
     {
         transform.LookAt(target);
         Vector3 targetVec = new Vector3(target.transform.position.x, target.transform.position.y, target.transform.position.z);
@@ -79,7 +85,6 @@ public class Projectiles : MonoBehaviour
 
 
     #endregion Funcs
-
     IEnumerator LifeTime()
     {
         yield return new WaitForSeconds(lifeTime);

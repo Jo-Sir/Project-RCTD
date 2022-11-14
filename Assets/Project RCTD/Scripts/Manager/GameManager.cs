@@ -12,6 +12,7 @@ public class GameManager : Singleton<GameManager>
     private int life;
     private int upgradeBlackLV;
     private int upgradeWhiteLV;
+    private bool gameOver;
     private FadeController fadeController = null;
     #endregion Fields
 
@@ -47,6 +48,7 @@ public class GameManager : Singleton<GameManager>
     }
     public int UpgradeWhiteLV { get => upgradeWhiteLV; set => upgradeWhiteLV = value; }
     public int UpgradeBlackLV { get => upgradeBlackLV; set => upgradeBlackLV = value; }
+    public bool GameOver { get => gameOver; set => gameOver = value; }
     #endregion
 
     #region UnityEngines
@@ -58,6 +60,7 @@ public class GameManager : Singleton<GameManager>
             Instantiate(Resources.Load<GameObject>("Prefabs/Controller/Fade"));
             fadeController = GameObject.Find("Fade(Clone)").GetComponent<FadeController>();
         }
+        GameOver = false;
         AudioManager.Instance.SetAudioMixerMute("Master", false);
     }
     #endregion UnityEngines
@@ -77,6 +80,7 @@ public class GameManager : Singleton<GameManager>
     public void BackToMainMenu()
     {
         Time.timeScale = 1f;
+        GameOver = true;
         StartCoroutine(FadeOutTerm("MainScenes"));
     }
     public void GameExit() 
