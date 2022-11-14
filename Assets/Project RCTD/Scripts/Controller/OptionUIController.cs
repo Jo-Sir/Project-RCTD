@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class OptionUIController : MonoBehaviour
@@ -21,16 +22,22 @@ public class OptionUIController : MonoBehaviour
     private bool bgmVolumeMute = false;
     private bool sfxVolumeMute = false;
     #endregion
-    #region UnityEngie
-    private void Update()
-    {
 
+    #region UnityEngie
+    private void OnEnable()
+    {
+        masterSlider.value = AudioManager.Instance.GetAudioMixerValue("Master");
+        bgmSlider.value = AudioManager.Instance.GetAudioMixerValue("BGM");
+        sfxSlider.value = AudioManager.Instance.GetAudioMixerValue("SFX");
     }
     #endregion
+
     #region Funcs
     public void CloseOption()
     {
-        Time.timeScale = UIManager.Instance.PreTimeScale;
+        Scene scene = SceneManager.GetActiveScene();
+        if (scene.name == "GameScenes")
+        { Time.timeScale = UIManager.Instance.PreTimeScale; }
         gameObject.SetActive(false);
     }
     public void SliderControll(string name)
@@ -48,7 +55,7 @@ public class OptionUIController : MonoBehaviour
                 value = sfxSlider.value;
                 break;
         }
-        AudioManager.Instance.AoudioControl(name, value);
+        AudioManager.Instance.SetAudioMixerValue(name, value);
     }
     public void MuteButton(string name)
     {
@@ -95,7 +102,15 @@ public class OptionUIController : MonoBehaviour
                 muteValue = sfxVolumeMute;
                 break;
         }
-        AudioManager.Instance.AoudioMuteControl(name, muteValue);
+        AudioManager.Instance.SetAudioMixerMute(name, muteValue);
+    }
+    public void BackToMainMenu()
+    {
+        GameManager.Instance.BackToMainMenu();
+    }
+    public void ExitGame()
+    {
+        GameManager.Instance.GameExit();
     }
     #endregion
 }

@@ -5,10 +5,16 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuController : MonoBehaviour
 {
+    #region SerializeField
+    [SerializeField] private GameObject optionUI;
+    #endregion
     #region UnityEngine
     private void Awake()
     {
-        GameManager.Instance.Init();
+        if (GameObject.Find("GameManager") == null)
+        {
+            GameManager.Instance.Init();
+        }
     }
     #endregion
     #region Funcs
@@ -16,5 +22,10 @@ public class MainMenuController : MonoBehaviour
     {
         GameManager.Instance.GameStart();
     }
+    public void SetActiveOptionUI()
+    {
+        optionUI.SetActive(true);
+    }
+
     #endregion
 }

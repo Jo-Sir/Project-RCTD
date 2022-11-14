@@ -58,6 +58,7 @@ public class Creep : MonoBehaviour, IDamagable
                             break;
                     }
                 }
+                audioSource.Play();
                 Die(); 
             }
         }
@@ -88,9 +89,10 @@ public class Creep : MonoBehaviour, IDamagable
     #region UnityEngines
     private void Awake()
     {
-        animator = GetComponent<Animator>();
-        colledr = GetComponent<CapsuleCollider>();
         paths = pathsData.paths;
+        animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
+        colledr = GetComponent<CapsuleCollider>();
         agent = GetComponent<NavMeshAgent>();
         creepUIController = GetComponentInChildren<CreepUIController>();
         material = GetComponentInChildren<Renderer>().material;
@@ -157,9 +159,9 @@ public class Creep : MonoBehaviour, IDamagable
     #region Funcs
     public void SetHP()
     {
-        if (GameManager.Instance.Wave >= 5) hp *= 2f;
-        if (GameManager.Instance.Wave >= 10) hp *= 2f;
-        if (GameManager.Instance.Wave >= 15) hp *= 2f;
+        if (GameManager.Instance.Wave >= 5) hp *= 3f;
+        if (GameManager.Instance.Wave >= 10) hp *= 3f;
+        if (GameManager.Instance.Wave >= 15) hp *= 3f;
         if (GameManager.Instance.Wave <= 0)
         { CurHp = hp * 1; }
         else { CurHp = hp * GameManager.Instance.Wave; }
@@ -183,7 +185,6 @@ public class Creep : MonoBehaviour, IDamagable
     public void Die()
     {
         if (isDie) { return; }
-        // audioSource.Play();
         animator.Play("Die");
         StartCoroutine(SetDissolveAmount());
     }

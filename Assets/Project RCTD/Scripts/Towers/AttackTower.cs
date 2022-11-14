@@ -21,7 +21,7 @@ public abstract class AttackTower : Tower, IAttackable
 
     #region Properties
     public float CurATK { get => curATK + (Upgrade * 10f); }
-    public float CurAS { get => baseAS; }
+    public float CurAS { get => curAS; }
     public float Upgrade 
     {
         get
@@ -70,9 +70,10 @@ public abstract class AttackTower : Tower, IAttackable
     #region Funcs
     public void Attack()
     {
+        bool skillProbabilityboll = ((SkillProbability + Upgrade) >= Random.Range(0f, 100f));
         animator.Play("TowerAttack");
-        StartCoroutine(AttackCool(baseAS));
-        if (skillCoolTimeOn && ((SkillProbability+Upgrade) >= Random.Range(0f, 100f))) { UseSkill(); }
+        StartCoroutine(AttackCool(CurAS));
+        if (skillProbabilityboll && skillCoolTimeOn) { UseSkill(); }
         GameObject obj = GameManager.Instance.ObjectGet(COLOR_TYPE, this.transform);
         obj.transform.position = new Vector3(transform.position.x, 1f, transform.position.z);
         Projectiles projectiles = obj.GetComponentInChildren<Projectiles>();
@@ -123,7 +124,7 @@ public abstract class AttackTower : Tower, IAttackable
     #endregion
 
     #region IEnumerators
-    protected virtual IEnumerator AttackCool(float baseAS)
+    protected virtual IEnumerator AttackCool(float CurAS)
     {
         isAttack = true;
         yield return new WaitForSeconds(CurAS);

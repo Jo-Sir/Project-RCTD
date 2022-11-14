@@ -20,6 +20,7 @@ public class UIController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI infoNameText;
     [SerializeField] private TextMeshProUGUI infoCurATKText;
     [SerializeField] private TextMeshProUGUI infoSkillProbabilityText;
+    [SerializeField] private TextMeshProUGUI resultText;
     [SerializeField] private GameObject clickTile;
     [SerializeField] private GameObject clickTower;
     [SerializeField] private GameObject clickGround;
@@ -27,6 +28,7 @@ public class UIController : MonoBehaviour
     [SerializeField] private GameObject clickUpgrade;
     [SerializeField] private GameObject clickInfo;
     [SerializeField] private GameObject clickOption;
+    [SerializeField] private GameObject resultUI;
     [SerializeField] private Button buttonMissionOne;
     [SerializeField] private Button buttonMissionTwo;
     [SerializeField] private Button buttonMissionThree;
@@ -35,12 +37,17 @@ public class UIController : MonoBehaviour
     #region Fields
     private StageController stageController;
     private TowerController towerController;
+    private AudioSource missionAudioSource;
     private int upgradeBlackPrice = 100;
     private int upgradeWhitePrice = 100;
     #endregion Fields
 
     #region UnityEngines
     private void Awake()
+    {
+        missionAudioSource = GameObject.Find("MissionSound").GetComponent<AudioSource>();
+    }
+    private void Start()
     {
         towerController = GameObject.Find("TowerController").GetComponent<TowerController>();
         stageController = GameObject.Find("StageController").GetComponent<StageController>();
@@ -200,6 +207,12 @@ public class UIController : MonoBehaviour
         }
 
     }
+    public void SetResultUI(string result)
+    {
+        Time.timeScale = 0f;
+        resultUI.gameObject.SetActive(true);
+        resultText.text = result;
+    }
     #endregion Funcs
 
     #region IEnumerator
@@ -230,6 +243,7 @@ public class UIController : MonoBehaviour
                 buttonMissionThree.interactable = true;
                 break;
         }
+        missionAudioSource.Play();
     }
     #endregion
 }

@@ -5,12 +5,9 @@ using UnityEngine.UI;
 
 public class FadeController : MonoBehaviour
 {
-    #region SerializeField
-    [SerializeField] Image fadeImage;
-    #endregion
-
     #region Fields
     private Animator animator;
+    private Image fadeImage;
     #endregion
 
     #region UnityEngine
@@ -19,9 +16,10 @@ public class FadeController : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
         animator = GetComponentInChildren<Animator>();
         fadeImage = GetComponentInChildren<Image>();
-        fadeImage.enabled = false;
+        StartCoroutine(StartCo());
     }
     #endregion
+
     #region Funcs
     public void FadeIn()
     {
@@ -31,10 +29,18 @@ public class FadeController : MonoBehaviour
     public void FadeOut()
     {
         animator.Play("FadeOut");
+        Time.timeScale = 1.0f;
     }
-    public void FadeImageSetActive(bool value)
+    public void FadeImageSetActive(bool value = false)
     {
         fadeImage.enabled = value;
     }
     #endregion
+
+    IEnumerator StartCo()
+    {
+        FadeIn();
+        yield return new WaitForSeconds(1f);
+        FadeImageSetActive();
+    }
 }

@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UIManager : Singleton<UIManager>
 {
     #region Fields
     private UIController uIController;
-    private float preTimeScale;
+    private float preTimeScale = 1f;
     #endregion Fields
 
     #region Proprety
@@ -16,7 +17,6 @@ public class UIManager : Singleton<UIManager>
     #region UnityEngines
     private new void Awake()
     {
-        base.Awake();
         if (uIController == null)
         {
             uIController = GameObject.Find("UIController").GetComponent<UIController>();
@@ -53,12 +53,15 @@ public class UIManager : Singleton<UIManager>
             case "life":
                 uIController.LifeTextUpdate(text);
                 break;
-
         }
     }
     public void TowerInfoUpdate()
     {
         uIController.InfoTextUpdate();
+    }
+    public void GameResult(string result)
+    { 
+        uIController.SetResultUI(result);
     }
     #endregion Funcs
 }

@@ -9,15 +9,17 @@ public class StageController : MonoBehaviour
     #endregion
 
     #region Fields
+    private ROUND_TYPE ROUND_TYPE;
     private int curWave = 0;
     private float time;
-    private ROUND_TYPE ROUND_TYPE;
     private int spawnCount;
+    private AudioSource audioSource;
     #endregion
 
     #region UnityEngine
     private void Awake()
     {
+        audioSource = GetComponent<AudioSource>();
         time = 10f;
         GameManager.Instance.Gold = 800;
         UIManager.Instance.TextUpdate("curWave", curWave.ToString());
@@ -42,7 +44,11 @@ public class StageController : MonoBehaviour
         }
         else
         {
-            if (curWave != 0) ROUND_TYPE++;
+            if (curWave != 0)
+            {
+                audioSource.Play();
+                ROUND_TYPE++; 
+            }
             curWave++;
             time = 60f;
             if (((int)ROUND_TYPE + 1) % 5 == 0) spawnCount = 1;
@@ -55,7 +61,8 @@ public class StageController : MonoBehaviour
     {
         if (curWave == 16)
         {
-            // Debug.Log("Å¬¸®¾î");
+
+            GameManager.Instance.GameResult(true);
             return;
         }
         GameManager.Instance.Wave = curWave;

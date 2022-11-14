@@ -22,7 +22,7 @@ public class GameManager : Singleton<GameManager>
         {
             life = value;
             UIManager.Instance.TextUpdate("life", life.ToString());
-            if (life == 0) Debug.Log("게임종료");
+            if (life <= 0) GameResult(false);
         }
         get => life;
     }
@@ -58,8 +58,7 @@ public class GameManager : Singleton<GameManager>
             Instantiate(Resources.Load<GameObject>("Prefabs/Controller/Fade"));
             fadeController = GameObject.Find("Fade(Clone)").GetComponent<FadeController>();
         }
-        AudioManager.Instance.AoudioMuteControl("Master", false);
-        SceneManager.sceneLoaded += OnSceneLoaded;
+        AudioManager.Instance.SetAudioMixerMute("Master", false);
     }
     #endregion UnityEngines
 
@@ -72,13 +71,28 @@ public class GameManager : Singleton<GameManager>
     {
         gold = 400;
         wave = 0;
-        life = 10;
+        life = 20;
         StartCoroutine(FadeOutTerm("GameScenes"));
     }
-    public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    public void BackToMainMenu()
     {
-        StartCoroutine(FadeInTerm());
-
+        Time.timeScale = 1f;
+        StartCoroutine(FadeOutTerm("MainScenes"));
+    }
+    public void GameExit() 
+    {
+        Application.Quit();
+    }
+    public void GameResult(bool result)
+    {
+        if (result)
+        {
+            UIManager.Instance.GameResult("Game Clear");
+        }
+        else
+        {
+            UIManager.Instance.GameResult("Game Over");
+        }
     }
     public GameObject ObjectGet(Enum key, Transform parentTransform)
     {
@@ -89,6 +103,7 @@ public class GameManager : Singleton<GameManager>
         ObjectPoolManager.Instance.ReturnObject(key.ToString(), obj);
     }
     #endregion
+
     #region IEnumerator
     IEnumerator FadeOutTerm(string scenesName)
     {
@@ -99,6 +114,7 @@ public class GameManager : Singleton<GameManager>
         {
             SceneManager.LoadScene(scenesName);
         }
+        StartCoroutine(FadeInTerm());
     }
     IEnumerator FadeInTerm()
     {
