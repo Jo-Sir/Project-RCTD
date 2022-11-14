@@ -17,8 +17,7 @@ public class TowerController : MonoBehaviour
     #region UnityEngines
     private void Awake()
     {
-        interactionCo = InteractionCo();
-        StartCoroutine(interactionCo);
+        StartCoroutine(InteractionCo());
     }
     #endregion UnityEngines
 
@@ -157,7 +156,6 @@ public class TowerController : MonoBehaviour
             yield return new CustomInputTouchCo(true);
             Interaction();
         }
-        StopCoroutine(interactionCo);
     }
     #endregion 
     private void OnDrawGizmos()

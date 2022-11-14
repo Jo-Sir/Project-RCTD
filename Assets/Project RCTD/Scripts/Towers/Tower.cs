@@ -32,6 +32,7 @@ public abstract class Tower : MonoBehaviour, IHasColorTYPE
         animator = GetComponent<Animator>();
         SetCOLOR_TYPE();
         SetPrice();
+        GameManager.Instance.returnAllObj += () => GameManager.Instance.ObjectReturn(TOWER_TYPE, gameObject);
     }
     #endregion UnitiyEngine
 

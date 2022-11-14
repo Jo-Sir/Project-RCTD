@@ -4,7 +4,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.AI;
-[RequireComponent (typeof(NavMeshAgent))]
+using UnityEngine.SceneManagement;
+[RequireComponent(typeof(NavMeshAgent))]
 public class Creep : MonoBehaviour, IDamagable
 {
     #region SerializeFields
@@ -34,39 +35,42 @@ public class Creep : MonoBehaviour, IDamagable
 
     #region Properties
     public float BaseHp { get => baseHp; }
-    public float CurHp 
+    public float CurHp
     {
-        set 
+        set
         {
             curHp = value;
             if (creepUIController.changeHpBar == null) return;
             creepUIController.changeHpBar.Invoke(curHp);
-            if (curHp <= 0) 
+            if (curHp <= 0)
             {
-                if (!isDie)
+                if (!IsDie)
                 {
                     switch (ROUND_TYPE)
                     {
                         case ROUND_TYPE.MISSION_ONE:
                             GameManager.Instance.Gold += 200;
+                            AudioManager.Instance.GoldSound.Play();
                             break;
                         case ROUND_TYPE.MISSION_TWO:
                             GameManager.Instance.Gold += 400;
+                            AudioManager.Instance.GoldSound.Play();
                             break;
                         case ROUND_TYPE.MISSION_THREE:
                             GameManager.Instance.Gold += 800;
+                            AudioManager.Instance.GoldSound.Play();
                             break;
                     }
+                    Die();
                 }
-                Die(); 
             }
         }
-        get 
-        { 
+        get
+        {
             return curHp;
         }
     }
-    public float CurMoveSpeed 
+    public float CurMoveSpeed
     {
         set
         {
@@ -102,6 +106,7 @@ public class Creep : MonoBehaviour, IDamagable
             if (paths.name == target.name) continue;
             tragetTransform.Add(target);
         }
+        GameManager.Instance.returnAllObj += () => GameManager.Instance.ObjectReturn(ROUND_TYPE, gameObject);
     }
     private void Update()
     {
@@ -158,9 +163,9 @@ public class Creep : MonoBehaviour, IDamagable
     #region Funcs
     public void SetHP()
     {
-        if (GameManager.Instance.Wave >= 5) { hp *= 3f; }
-        if (GameManager.Instance.Wave >= 10) { hp *= 3f; }
-        if (GameManager.Instance.Wave >= 15) { hp *= 3f; }
+        if (GameManager.Instance.Wave >= 5) { hp *= 2f; }
+        if (GameManager.Instance.Wave >= 10) { hp *= 2f; }
+        if (GameManager.Instance.Wave >= 15) { hp *= 2f; }
         if (GameManager.Instance.Wave <= 0)
         { CurHp = hp * 1; }
         else { CurHp = hp * GameManager.Instance.Wave; }
@@ -183,7 +188,7 @@ public class Creep : MonoBehaviour, IDamagable
     }
     public void Die()
     {
-        if (isDie) { return; }
+        if (IsDie) { return; }
         animator.Play("Die");
         audioSource.Play();
         StartCoroutine(SetDissolveAmount());

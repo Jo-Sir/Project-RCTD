@@ -21,6 +21,7 @@ public class CreepUIController : MonoBehaviour
     private Creep parentcreep;
     IEnumerator updateRedHpCo;
     #endregion
+
     #region Unity_Engine
     private void Awake()
     {

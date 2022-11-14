@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using System;
 using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
     #region Fields
+    public UnityAction returnAllObj;
     private int wave;
     private int gold;
     private int life;
@@ -75,12 +77,14 @@ public class GameManager : Singleton<GameManager>
         gold = 400;
         wave = 0;
         life = 20;
+        gameOver = false;
         StartCoroutine(FadeOutTerm("GameScenes"));
     }
     public void BackToMainMenu()
     {
         Time.timeScale = 1f;
         GameOver = true;
+        returnAllObj?.Invoke();
         StartCoroutine(FadeOutTerm("MainScenes"));
     }
     public void GameExit() 
@@ -113,7 +117,7 @@ public class GameManager : Singleton<GameManager>
     {
         fadeController.FadeImageSetActive(true);
         fadeController.FadeOut();
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.9f);
         if (scenesName != null)
         {
             SceneManager.LoadScene(scenesName);
@@ -123,7 +127,7 @@ public class GameManager : Singleton<GameManager>
     IEnumerator FadeInTerm()
     {
         fadeController.FadeIn();
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
         fadeController.FadeImageSetActive(false);
     }
     #endregion

@@ -498,7 +498,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ROUND_TYPE: 11
-  baseHp: 175
+  baseHp: 250
   baseMoveSpeed: 2
   pathsData: {fileID: 11400000, guid: 039c7dfcab7301648adf899ce923ec93, type: 2}
 --- !u!136 &3814769116220609147

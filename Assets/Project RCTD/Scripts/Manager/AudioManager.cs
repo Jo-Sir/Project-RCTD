@@ -9,11 +9,13 @@ public class AudioManager : Singleton<AudioManager>
 {
 
     #region Fields
-    public AudioMixer audioMixer;
+    private AudioMixer audioMixer;
+    private AudioSource goldSound;
     #endregion
 
     #region Property
     public float Pitch { get => Time.timeScale; }
+    public AudioSource GoldSound { get => goldSound; set => goldSound = value; }
     #endregion
 
     #region UnityEngine

@@ -38,8 +38,9 @@ public class FadeController : MonoBehaviour
 
     IEnumerator StartCo()
     {
+        FadeImageSetActive(true);
         FadeIn();
         yield return new WaitForSeconds(0.9f);
-        FadeImageSetActive();
+        FadeImageSetActive(false);
     }
 }
