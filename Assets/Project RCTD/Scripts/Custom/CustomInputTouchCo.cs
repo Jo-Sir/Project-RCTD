@@ -22,6 +22,7 @@ public class CustomInputTouchCo : IEnumerator
     {
         get
         {
+#if UNITY_EDITOR
             if (isNext)
             {
                 return !(!EventSystem.current.IsPointerOverGameObject() && Input.GetMouseButtonDown(0));
@@ -30,11 +31,23 @@ public class CustomInputTouchCo : IEnumerator
             {
                 return !Input.GetMouseButtonDown(0);
             }
+
+#elif PLATFORM_ANDROID
+if (isNext)
+            {
+                return !(!EventSystem.current.IsPointerOverGameObject() && (Input.touchCount > 0 ));
+            }
+            else
+            {
+                return !(Input.touchCount > 0);
+            }
+#endif
         }
     }
 
     public bool MoveNext()
     {
+#if UNITY_EDITOR
         if (isNext)
         {
             return !(!EventSystem.current.IsPointerOverGameObject() && Input.GetMouseButtonDown(0));
@@ -43,10 +56,21 @@ public class CustomInputTouchCo : IEnumerator
         {
             return !Input.GetMouseButtonDown(0);
         }
-    }
 
+#elif PLATFORM_ANDROID
+if (isNext)
+            {
+                return !((Input.touchCount > 0));
+            }
+            else
+            {
+                return !(Input.touchCount > 0);
+            }
+#endif
+    }
     public void Reset()
     {
         throw new System.NotImplementedException();
     }
 }
+

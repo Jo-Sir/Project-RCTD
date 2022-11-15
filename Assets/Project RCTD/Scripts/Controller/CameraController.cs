@@ -1,18 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.SearchService;
 using UnityEngine;
-
 public class CameraController : MonoBehaviour
 {
-    #region SerializeField
-    [SerializeField, Range(0.01f, 0.1f)] private float mouseSpeed = 0.01f;
-    #endregion
-
     #region Fields
     private float mouseY;
     private bool isScroll = false;
+    private float beganTouch;
+    private float curTouch;
     #endregion
 
     #region Unity_Engine
@@ -30,30 +26,39 @@ public class CameraController : MonoBehaviour
 
     #region Funcs
 
-    float curMouseY;
-    float preMouseY;
-
     private void CameraMove()
     {
 
+#if UNITY_EDITOR
         if (Input.GetMouseButtonDown(1))
         {
             isScroll = true;
-            mouseY = Input.mousePosition.y;            
+            mouseY = Input.mousePosition.y;
         }
 
-        if(Input.GetMouseButtonUp(1))
+        if (Input.GetMouseButtonUp(1))
         {
             isScroll = false;
             mouseY = 0f;
         }
-
-        if(isScroll)
+        if (isScroll)
         {
-            float curMouseY = (mouseY - Input.mousePosition.y) * mouseSpeed + transform.position.z;
+            float curMouseY = (mouseY - Input.mousePosition.y) * 0.01f + transform.position.z;
             mouseY = Input.mousePosition.y;
             transform.position = new Vector3(transform.position.x, transform.position.y, Mathf.Clamp(curMouseY, -10.25f, -6.18f));
         }
+#elif PLATFORM_ANDROID
+        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+        {
+            beganTouch = Input.GetTouch(0).position.y;
+        }
+        // 스크롤중일때
+        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved)
+        {
+            curTouch = (beganTouch - Input.GetTouch(0).position.y) * 0.0005f + transform.position.z;
+            transform.position = new Vector3(transform.position.x, transform.position.y, Mathf.Clamp(curTouch, -10.25f, -6.18f));
+        }
+#endif
     }
     #endregion
 }

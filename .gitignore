@@ -59,3 +59,6 @@ sysinfo.txt
 crashlytics-build.properties
 
 /Assets/OutAssets
+/Assets/Plugins
+/Assets/GoogleMobileAds
+/Assets/ExternalDependencyManager

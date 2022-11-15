@@ -9,6 +9,7 @@ public class TowerController : MonoBehaviour
 {
     #region Fields
     private RaycastHit hit;
+    Ray ray;
     private Tower curTower = null;
     private IBuildable curTile = null;
     private IEnumerator interactionCo;
@@ -34,8 +35,11 @@ public class TowerController : MonoBehaviour
     /// </summary>
     private void Interaction()
     {
-        if (hit.transform != null) curTile.ParticleOnOff(false); ;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+
+        #if UNITY_EDITOR
+        if (hit.transform != null) curTile.ParticleOnOff(false);
+        ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, 1 << 7))
         {
             if (hit.transform.GetComponent<IBuildable>() == null) return;
@@ -54,11 +58,44 @@ public class TowerController : MonoBehaviour
         }
         else
         {
-            if (curTile != null) curTile.ParticleOnOff(false);
+            if (curTile != null) {curTile.ParticleOnOff(false); }
             curTile = null;
             curTower = null;
             UIManager.Instance.ClickGroundUI();
         }
+        #elif PLATFORM_ANDROID
+        if (IsPointerOverUIObject()) {return; }
+        if (hit.transform != null) curTile.ParticleOnOff(false);
+        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+        {
+            Debug.Log("ray 들어옴");
+            ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);  
+        }
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, 1 << 7))
+        {
+            if (hit.transform.GetComponent<IBuildable>() == null) return;
+            curTile = hit.transform.GetComponent<IBuildable>();
+            curTile.ParticleOnOff(true);
+            if (curTile.BuildCheck(out curTower))
+            {
+                UIManager.Instance.ClickTileUI();
+            }
+            else
+            {
+                UIManager.Instance.ClickTowerUI();
+                UIManager.Instance.TowerPurchaseButtonUpdate();
+            }
+            UIManager.Instance.TowerInfoUpdate();
+        }
+        else
+        {
+            Debug.Log("else");
+            if (curTile != null) { curTile.ParticleOnOff(false); }
+            curTile = null;
+            curTower = null;
+            UIManager.Instance.ClickGroundUI();
+        }
+        #endif
     }
     /// <summary>
     ///  타워생성
@@ -148,6 +185,15 @@ public class TowerController : MonoBehaviour
     {
         return curTower;
     }
+
+    private bool IsPointerOverUIObject()
+    {
+        PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
+        eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+        return results.Count > 0;
+    }
     #endregion Funcs
 
     #region IEnumerator
@@ -155,11 +201,16 @@ public class TowerController : MonoBehaviour
     {
         while (GameManager.Instance.GameOver == false)
         {
+#if UNITY_EDITOR
             yield return new CustomInputTouchCo(true);
+#elif PLATFORM_ANDROID
+yield return new CustomInputTouchCo(false);
+
+#endif
             Interaction();
         }
     }
-    #endregion 
+#endregion
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.black;

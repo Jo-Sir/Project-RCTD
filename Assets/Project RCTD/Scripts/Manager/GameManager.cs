@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using System;
 using UnityEngine.SceneManagement;
+using GoogleMobileAds.Api;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -16,6 +17,8 @@ public class GameManager : Singleton<GameManager>
     private int upgradeWhiteLV;
     private bool gameOver;
     private FadeController fadeController = null;
+    private InterstitialAd interstitial;
+    private BannerView bannerView;
     #endregion Fields
 
     #region Properties
@@ -51,13 +54,22 @@ public class GameManager : Singleton<GameManager>
     }
     public int UpgradeWhiteLV { get => upgradeWhiteLV; set => upgradeWhiteLV = value; }
     public int UpgradeBlackLV { get => upgradeBlackLV; set => upgradeBlackLV = value; }
-    public bool GameOver { get => gameOver; set => gameOver = value; }
+    public bool GameOver 
+    { 
+        get => gameOver;
+        set 
+        { 
+            gameOver = value;
+        }
+    }
+    public InterstitialAd Interstitial => interstitial;
     #endregion
 
     #region UnityEngines
     private new void Awake()
     {
         base.Awake();
+        
         if (fadeController == null)
         {
             Instantiate(Resources.Load<GameObject>("Prefabs/Controller/Fade"));
@@ -71,7 +83,21 @@ public class GameManager : Singleton<GameManager>
     #region Funcs
     public void Init()
     {
+        SetInitScreen();
         ObjectPoolManager.Instance.Init();
+    }
+    public void GetInterstitialAd(InterstitialAd interstitialAd)
+    {
+        this.interstitial = interstitialAd;
+    }
+    public void GetBannerView(BannerView bannerView)
+    { 
+        this.bannerView = bannerView;
+    }
+    public void SetInitScreen()
+    {
+        Screen.SetResolution(1920, 1080, true);
+        Screen.sleepTimeout = SleepTimeout.NeverSleep;
     }
     public void GameStart()
     {
@@ -127,6 +153,7 @@ public class GameManager : Singleton<GameManager>
         if (scenesName != null)
         {
             SceneManager.LoadScene(scenesName);
+            if (scenesName == "GameScenes") {bannerView.Destroy(); }
         }
         StartCoroutine(FadeInTerm());
     }
