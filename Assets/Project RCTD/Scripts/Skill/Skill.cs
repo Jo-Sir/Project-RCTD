@@ -19,6 +19,7 @@ public abstract class Skill : MonoBehaviour
     private void Awake()
     {
         particleSystem = GetComponent<ParticleSystem>();
+        GameManager.Instance.returnAllObj += () => GameManager.Instance.ObjectReturn(SKILL_TYPE, gameObject);
     }
     private void OnEnable()
     {

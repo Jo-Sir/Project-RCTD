@@ -21,7 +21,12 @@ public class Projectiles : MonoBehaviour
 
     #region Property
     #endregion
+
     #region UnityEngines
+    private void Awake()
+    {
+        GameManager.Instance.returnAllObj += () => GameManager.Instance.ObjectReturn(COLOR_TYPE, gameObject);
+    }
     void Update()
     {
         Launch();

@@ -32,6 +32,7 @@ public class UIController : MonoBehaviour
     [SerializeField] private Button buttonMissionOne;
     [SerializeField] private Button buttonMissionTwo;
     [SerializeField] private Button buttonMissionThree;
+    [SerializeField] private Button buttonTowerCombination; 
     #endregion SerializeFields
 
     #region Fields
@@ -130,6 +131,18 @@ public class UIController : MonoBehaviour
         { infoSkillProbabilityText.text = attackTower.SkillProbability.ToString(); }
         
     }
+    public void TowerPurchaseButtonCheck()
+    {
+        AttackTower attackTower = (AttackTower)towerController.CurTower;
+        if ((TOWER_TYPE)Enum.Parse(typeof(TOWER_TYPE), attackTower.Name) == TOWER_TYPE.BLACK_KING ||
+            (TOWER_TYPE)Enum.Parse(typeof(TOWER_TYPE), attackTower.Name) == TOWER_TYPE.WHITE_KING ||
+            (TOWER_TYPE)Enum.Parse(typeof(TOWER_TYPE), attackTower.Name) == TOWER_TYPE.BLACK_QUEEN ||
+            (TOWER_TYPE)Enum.Parse(typeof(TOWER_TYPE), attackTower.Name) == TOWER_TYPE.WHITE_QUEEN)
+        { buttonTowerCombination.interactable = false; }
+        else
+        { buttonTowerCombination.interactable = true; }
+    }
+
     public void ChangeGameSpeed()
     {
         if (Time.timeScale > 1f)

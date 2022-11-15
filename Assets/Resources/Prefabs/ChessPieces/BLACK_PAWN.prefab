@@ -103,7 +103,7 @@ MonoBehaviour:
   COLOR_TYPE: 0
   SKILL_TYPE: 0
   atkAbleRange: 3
-  projectilesRange: 1
+  projectilesRange: 2
   coolTime: 100
   baseATK: 25
   baseAS: 0.6

@@ -31,6 +31,7 @@ public class Creep : MonoBehaviour, IDamagable
     private CreepUIController creepUIController;
     private CapsuleCollider colledr;
     private IEnumerator SetDeBuffTimeCo;
+    private ParticleSystem hitParticle;
     #endregion Fields
 
     #region Properties
@@ -59,6 +60,9 @@ public class Creep : MonoBehaviour, IDamagable
                         case ROUND_TYPE.MISSION_THREE:
                             GameManager.Instance.Gold += 800;
                             AudioManager.Instance.GoldSound.Play();
+                            break;
+                        case ROUND_TYPE.ROUND_FIFTEEN:
+                            GameManager.Instance.GameResult(true);
                             break;
                     }
                     Die();
@@ -92,6 +96,7 @@ public class Creep : MonoBehaviour, IDamagable
     #region UnityEngines
     private void Awake()
     {
+        hitParticle = GetComponentInChildren<ParticleSystem>();
         paths = pathsData.paths;
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
@@ -135,7 +140,7 @@ public class Creep : MonoBehaviour, IDamagable
                     GameManager.Instance.Life -= 10;
                     break;
                 case ROUND_TYPE.ROUND_FIFTEEN:
-                    GameManager.Instance.Life -= 10;
+                    GameManager.Instance.GameResult(false);
                     break;
                 default:
                     GameManager.Instance.Life -= 1;
@@ -173,6 +178,7 @@ public class Creep : MonoBehaviour, IDamagable
     }
     public void TakeHit(float damage)
     {
+        hitParticle?.Play();
         CurHp -= damage;
     }
     public void DistanceCheck()

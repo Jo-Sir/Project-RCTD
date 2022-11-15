@@ -48,6 +48,7 @@ public class TowerController : MonoBehaviour
             else
             {
                 UIManager.Instance.ClickTowerUI();
+                UIManager.Instance.TowerPurchaseButtonUpdate();
             }
             UIManager.Instance.TowerInfoUpdate();
         }
@@ -76,6 +77,7 @@ public class TowerController : MonoBehaviour
         GameManager.Instance.Gold -= 200;
         curTower = obj.GetComponent<Tower>();
         UIManager.Instance.ClickTowerUI();
+        UIManager.Instance.TowerPurchaseButtonUpdate();
     }
     /// <summary>
     /// 타워 조합

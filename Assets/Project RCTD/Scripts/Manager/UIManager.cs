@@ -55,6 +55,10 @@ public class UIManager : Singleton<UIManager>
                 break;
         }
     }
+    public void TowerPurchaseButtonUpdate()
+    {
+        uIController.TowerPurchaseButtonCheck();
+    }
     public void TowerInfoUpdate()
     {
         uIController.InfoTextUpdate();

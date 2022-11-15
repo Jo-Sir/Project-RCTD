@@ -117,12 +117,12 @@ public abstract class AttackTower : Tower, IAttackable
         switch (COLOR_TYPE)
         {
             case COLOR_TYPE.BLACK:
-                curATK = baseATK * 0.5f;
-                curAS = baseAS * 0.5f;
-                break;
-            case COLOR_TYPE.WHITE:
                 curATK = baseATK * 1.5f;
                 curAS = baseAS * 1.5f;
+                break;
+            case COLOR_TYPE.WHITE:
+                curATK = baseATK * 0.5f;
+                curAS = baseAS * 0.5f;
                 projectilesRange = 0f;
                 break;
             default:

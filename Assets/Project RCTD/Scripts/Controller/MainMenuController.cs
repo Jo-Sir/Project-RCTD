@@ -7,6 +7,7 @@ public class MainMenuController : MonoBehaviour
 {
     #region SerializeField
     [SerializeField] private GameObject optionUI;
+    [SerializeField] private GameObject explanationUI;
     #endregion
     #region UnityEngine
     private void Awake()
@@ -26,6 +27,9 @@ public class MainMenuController : MonoBehaviour
     {
         optionUI.SetActive(true);
     }
-
+    public void SetActiveExplanationUI()
+    {
+        explanationUI.SetActive(true);
+    }
     #endregion
 }

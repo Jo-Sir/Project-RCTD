@@ -105,7 +105,7 @@ MonoBehaviour:
   atkAbleRange: 4
   projectilesRange: 2
   coolTime: 10
-  baseATK: 35
+  baseATK: 40
   baseAS: 1.2
   target: {fileID: 0}
   targetLayerMask:

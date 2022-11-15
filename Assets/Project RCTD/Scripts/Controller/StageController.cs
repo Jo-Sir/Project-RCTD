@@ -20,7 +20,7 @@ public class StageController : MonoBehaviour
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
-        time = 10f;
+        time = 15f;
         GameManager.Instance.Gold = 800;
         UIManager.Instance.TextUpdate("curWave", curWave.ToString());
         AudioManager.Instance.GoldSound = audioSource;
@@ -39,7 +39,10 @@ public class StageController : MonoBehaviour
         {
             time -= Time.deltaTime;
             if (time < 10)
-            { UIManager.Instance.TextUpdate("time", $"0{time:N2}"); }
+            {
+                if (time <= 0) { time = 0f; }
+                UIManager.Instance.TextUpdate("time", $"0{time:N2}"); 
+            }
             else
             { UIManager.Instance.TextUpdate("time", $"{time:N2}"); }
         }
@@ -51,9 +54,16 @@ public class StageController : MonoBehaviour
                 ROUND_TYPE++; 
             }
             curWave++;
-            time = 60f;
-            if (((int)ROUND_TYPE + 1) % 5 == 0) spawnCount = 1;
-            else spawnCount = 40;
+            if (((int)ROUND_TYPE + 1) % 5 == 0)
+            {
+                time = 30f;
+                spawnCount = 1;
+            }
+            else
+            {
+                time = 60f;
+                spawnCount = 40;
+            }
             WaveStart();
         }
 

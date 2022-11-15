@@ -24,6 +24,7 @@ public class GameManager : Singleton<GameManager>
         set
         {
             life = value;
+            if (life <= 0) { life = 0; }
             UIManager.Instance.TextUpdate("life", life.ToString());
             if (life <= 0) GameResult(false);
         }
@@ -74,6 +75,7 @@ public class GameManager : Singleton<GameManager>
     }
     public void GameStart()
     {
+        returnAllObj?.Invoke();
         gold = 400;
         wave = 0;
         life = 20;
@@ -84,13 +86,17 @@ public class GameManager : Singleton<GameManager>
     {
         Time.timeScale = 1f;
         GameOver = true;
-        returnAllObj?.Invoke();
         StartCoroutine(FadeOutTerm("MainScenes"));
+        returnAllObj?.Invoke();
     }
     public void GameExit() 
     {
         Application.Quit();
     }
+    /// <summary>
+    /// true = Game Clear, false = Game Over
+    /// </summary>
+    /// <param value="result"></param>
     public void GameResult(bool result)
     {
         if (result)
