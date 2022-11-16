@@ -26,7 +26,7 @@ public class Banner : MonoBehaviour
         //배너 ID 넣기
         string adUnitId = "ca-app-pub-3940256099942544/6300978111";
 #elif UNITY_IPHONE
-            string adUnitId = "ca-app-pub-3940256099942544/2934735716";
+            string adUnitId = "ca-app-pub-6565752735223045/4357496145";
 #else
             string adUnitId = "unexpected_platform";
 #endif

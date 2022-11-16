@@ -32,7 +32,7 @@ public class IntersririalAD : MonoBehaviour
         // 전면 ID 넣기
         string adUnitId = "ca-app-pub-3940256099942544/1033173712";
 #elif UNITY_IPHONE
-        string adUnitId = "ca-app-pub-3940256099942544/4411468910";
+        string adUnitId = "ca-app-pub-6565752735223045/9226679440";
 #else
         string adUnitId = "unexpected_platform";
 #endif

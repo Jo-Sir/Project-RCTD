@@ -250,7 +250,7 @@ PlayerSettings:
   AndroidTargetDevices: 0
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: '{dedicated}: Desktop/ProjectRCTD_KeyStore.keystore'
+  AndroidKeystoreName: "D:/UNITYPROJECTs/RCTD_APP/RCTD\uC790\uB8CC/Keys/Keys.keystore"
   AndroidKeyaliasName: jomlifeco95g
   AndroidBuildApkPerCpuArchitecture: 0
   AndroidTVCompatibility: 0
