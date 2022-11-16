@@ -60,6 +60,7 @@ public class OptionUIController : MonoBehaviour
     public void MuteButton(string name)
     {
         bool muteValue = false;
+        Slider curslider = null;
         switch (name)
         {
             case "Master":
@@ -74,6 +75,7 @@ public class OptionUIController : MonoBehaviour
                     masterMuteButton.image.sprite = muteSprite;
                 }
                 muteValue = masterVolumeMute;
+                curslider = masterSlider;
                 break;
             case "BGM":
                 if (bgmVolumeMute == true)
@@ -87,6 +89,7 @@ public class OptionUIController : MonoBehaviour
                     bgmMuteButton.image.sprite = muteSprite;
                 }
                 muteValue = bgmVolumeMute;
+                curslider = bgmSlider;
                 break;
             case "SFX":
                 if (sfxVolumeMute == true)
@@ -100,9 +103,10 @@ public class OptionUIController : MonoBehaviour
                     sfxMuteButton.image.sprite = muteSprite;
                 }
                 muteValue = sfxVolumeMute;
+                curslider = sfxSlider;
                 break;
         }
-        AudioManager.Instance.SetAudioMixerMute(name, muteValue);
+        AudioManager.Instance.SetAudioMixerMute(name, muteValue, curslider);
     }
     public void BackToMainMenu()
     {

@@ -5,7 +5,11 @@ using GoogleMobileAds.Api;
 
 public class Banner : MonoBehaviour
 {
+    #region Fields
     private BannerView bannerView;
+    #endregion
+
+    #region UnityEngine
     public void Start()
     {
         // Initialize the Google Mobile Ads SDK.
@@ -13,7 +17,9 @@ public class Banner : MonoBehaviour
         this.RequestBanner();
         GameManager.Instance.GetBannerView(bannerView);
     }
+    #endregion
 
+    #region Func
     private void RequestBanner()
     {
 #if UNITY_ANDROID
@@ -26,8 +32,8 @@ public class Banner : MonoBehaviour
 #endif
         this.bannerView = new BannerView(adUnitId, AdSize.Banner, AdPosition.Bottom);
         AdRequest request = new AdRequest.Builder().Build();
-
         // Load the banner with the request.
         this.bannerView.LoadAd(request);
     }
+    #endregion
 }

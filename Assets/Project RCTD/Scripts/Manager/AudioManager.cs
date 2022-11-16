@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 
@@ -32,10 +33,12 @@ public class AudioManager : Singleton<AudioManager>
         if (value <=-40) { value = -80; }
         audioMixer.SetFloat(name, value);
     }
-    public void SetAudioMixerMute(string name, bool mute)
+    public void SetAudioMixerMute(string name, bool mute, Slider slider)
     {
         float value = mute ? -80 : 0;
         audioMixer.SetFloat(name, value);
+        audioMixer.GetFloat(name, out float outvalue);
+        slider.value = outvalue;
     }
     public float GetAudioMixerValue(string name)
     {

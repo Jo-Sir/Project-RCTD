@@ -76,7 +76,6 @@ public class GameManager : Singleton<GameManager>
             fadeController = GameObject.Find("Fade(Clone)").GetComponent<FadeController>();
         }
         GameOver = false;
-        AudioManager.Instance.SetAudioMixerMute("Master", false);
     }
     #endregion UnityEngines
 

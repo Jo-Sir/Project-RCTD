@@ -18,7 +18,7 @@ public class ResultUIController : MonoBehaviour
     {
         yield return new CustomInputTouchCo(false);
         GameManager.Instance.BackToMainMenu();
-        GameManager.Instance.Interstitial.Show();
+        GameManager.Instance.Interstitial?.Show();
         StopCoroutine(pressToMainCo);
     }
 #endregion
