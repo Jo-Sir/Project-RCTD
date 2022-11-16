@@ -153,7 +153,8 @@ public class GameManager : Singleton<GameManager>
         if (scenesName != null)
         {
             SceneManager.LoadScene(scenesName);
-            if (scenesName == "GameScenes") {bannerView.Destroy(); }
+            if (scenesName == "GameScenes") {bannerView?.Destroy(); }
+            if (scenesName == "MainScenes") { interstitial?.Destroy(); }
         }
         StartCoroutine(FadeInTerm());
     }

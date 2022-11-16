@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class ResultUIController : MonoBehaviour
 {
-    IEnumerator ressToMainCo;
+    IEnumerator pressToMainCo;
     #region UnityEngine
     private void Awake()
     {
-        ressToMainCo = PressToMain();
-        StartCoroutine(ressToMainCo);
+        pressToMainCo = PressToMain();
+        StartCoroutine(pressToMainCo);
     }
     #endregion
 
@@ -19,7 +19,7 @@ public class ResultUIController : MonoBehaviour
         yield return new CustomInputTouchCo(false);
         GameManager.Instance.BackToMainMenu();
         GameManager.Instance.Interstitial.Show();
-        StopCoroutine(ressToMainCo);
+        StopCoroutine(pressToMainCo);
     }
 #endregion
 }

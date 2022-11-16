@@ -226,7 +226,7 @@ public class Creep : MonoBehaviour, IDamagable
         creepUIController.gameObject.SetActive(false);
         for (float i = 0; i <= 1; i += 0.007f)
         {
-            material.SetFloat("_DissolveAmount", i);
+            material.SetFloat("_DissolveAmount", i * Time.timeScale);
             yield return null;
         }
         GameManager.Instance.ObjectReturn(ROUND_TYPE, this.gameObject);

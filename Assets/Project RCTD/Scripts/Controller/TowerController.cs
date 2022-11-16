@@ -37,7 +37,7 @@ public class TowerController : MonoBehaviour
     {
 
 
-        #if UNITY_EDITOR
+#if UNITY_EDITOR
         if (hit.transform != null) curTile.ParticleOnOff(false);
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, 1 << 7))
@@ -63,7 +63,7 @@ public class TowerController : MonoBehaviour
             curTower = null;
             UIManager.Instance.ClickGroundUI();
         }
-        #elif PLATFORM_ANDROID
+#elif UNITY_ANDROID
         if (IsPointerOverUIObject()) {return; }
         if (hit.transform != null) curTile.ParticleOnOff(false);
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
@@ -95,7 +95,7 @@ public class TowerController : MonoBehaviour
             curTower = null;
             UIManager.Instance.ClickGroundUI();
         }
-        #endif
+#endif
     }
     /// <summary>
     ///  타워생성
@@ -203,7 +203,7 @@ public class TowerController : MonoBehaviour
         {
 #if UNITY_EDITOR
             yield return new CustomInputTouchCo(true);
-#elif PLATFORM_ANDROID
+#elif UNITY_ANDROID
 yield return new CustomInputTouchCo(false);
 
 #endif

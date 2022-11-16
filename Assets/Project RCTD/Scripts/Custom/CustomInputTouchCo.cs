@@ -32,7 +32,7 @@ public class CustomInputTouchCo : IEnumerator
                 return !Input.GetMouseButtonDown(0);
             }
 
-#elif PLATFORM_ANDROID
+#elif UNITY_ANDROID
 if (isNext)
             {
                 return !(!EventSystem.current.IsPointerOverGameObject() && (Input.touchCount > 0 ));
@@ -57,7 +57,7 @@ if (isNext)
             return !Input.GetMouseButtonDown(0);
         }
 
-#elif PLATFORM_ANDROID
+#elif UNITY_ANDROID
 if (isNext)
             {
                 return !((Input.touchCount > 0));

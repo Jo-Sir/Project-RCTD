@@ -39,6 +39,7 @@ public class UIController : MonoBehaviour
     private StageController stageController;
     private TowerController towerController;
     private AudioSource missionAudioSource;
+    private AudioSource clickAudioSource;
     private int upgradeBlackPrice = 100;
     private int upgradeWhitePrice = 100;
     #endregion Fields
@@ -47,6 +48,7 @@ public class UIController : MonoBehaviour
     private void Awake()
     {
         missionAudioSource = GameObject.Find("MissionSound").GetComponent<AudioSource>();
+        clickAudioSource = GetComponent<AudioSource>();
     }
     private void Start()
     {
@@ -201,10 +203,12 @@ public class UIController : MonoBehaviour
     public void ClickUpgrade(string color_typestr)
     {
         COLOR_TYPE cOLOR_TYPE = (COLOR_TYPE)Enum.Parse(typeof(COLOR_TYPE), color_typestr);
+
         switch (cOLOR_TYPE)
         {
             case COLOR_TYPE.BLACK:
                 if (GameManager.Instance.Gold < upgradeBlackPrice) return;
+                clickAudioSource.Play();
                 GameManager.Instance.UpgradeBlackLV += 1;
                 GameManager.Instance.Gold -= upgradeBlackPrice;
                 upgradeBlackPrice += 10;
@@ -212,6 +216,7 @@ public class UIController : MonoBehaviour
                 break;
             case COLOR_TYPE.WHITE:
                 if (GameManager.Instance.Gold < upgradeWhitePrice) return;
+                clickAudioSource.Play();
                 GameManager.Instance.UpgradeWhiteLV += 1;
                 GameManager.Instance.Gold -= upgradeWhitePrice;
                 upgradeWhitePrice +=10;

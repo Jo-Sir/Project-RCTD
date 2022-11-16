@@ -12,16 +12,10 @@ public class CameraController : MonoBehaviour
     #endregion
 
     #region Unity_Engine
-    private void Awake()
-    {
-        // Cursor.lockState = CursorLockMode.Locked;
-    }
     void Update()
     {
         CameraMove();
     }
-
-
     #endregion
 
     #region Funcs
@@ -47,15 +41,19 @@ public class CameraController : MonoBehaviour
             mouseY = Input.mousePosition.y;
             transform.position = new Vector3(transform.position.x, transform.position.y, Mathf.Clamp(curMouseY, -10.25f, -6.18f));
         }
-#elif PLATFORM_ANDROID
+#elif UNITY_ANDROID
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+        {
+            beganTouch = Input.GetTouch(0).position.y;
+        }
+        if(Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Stationary)
         {
             beganTouch = Input.GetTouch(0).position.y;
         }
         // 스크롤중일때
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved)
         {
-            curTouch = (beganTouch - Input.GetTouch(0).position.y) * 0.0005f + transform.position.z;
+            curTouch = (beganTouch - Input.GetTouch(0).position.y) * 0.001f + transform.position.z;
             transform.position = new Vector3(transform.position.x, transform.position.y, Mathf.Clamp(curTouch, -10.25f, -6.18f));
         }
 #endif
