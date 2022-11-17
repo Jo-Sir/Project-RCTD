@@ -22,51 +22,42 @@ public class CustomInputTouchCo : IEnumerator
     {
         get
         {
-#if UNITY_EDITOR
-            if (isNext)
-            {
-                return !(!EventSystem.current.IsPointerOverGameObject() && Input.GetMouseButtonDown(0));
-            }
-            else
-            {
-                return !Input.GetMouseButtonDown(0);
-            }
+            bool isIf;
+            bool isElseIf;
 
+#if UNITY_EDITOR
+            isIf     = !(!EventSystem.current.IsPointerOverGameObject() && Input.GetMouseButtonDown(0));
+            isElseIf = !Input.GetMouseButtonDown(0);
 #elif UNITY_ANDROID
-if (isNext)
-            {
-                return !(!EventSystem.current.IsPointerOverGameObject() && (Input.touchCount > 0 ));
-            }
-            else
-            {
-                return !(Input.touchCount > 0);
-            }
+            isIf     = !(!EventSystem.current.IsPointerOverGameObject() && (Input.touchCount > 0 ));
+            isElseIf = !(Input.touchCount > 0);
 #endif
+
+            if (isNext)
+            { return isIf; }
+            else
+            { return isElseIf; }
+         
         }
     }
 
     public bool MoveNext()
     {
-#if UNITY_EDITOR
-        if (isNext)
-        {
-            return !(!EventSystem.current.IsPointerOverGameObject() && Input.GetMouseButtonDown(0));
-        }
-        else
-        {
-            return !Input.GetMouseButtonDown(0);
-        }
+        bool isIf;
+        bool isElseIf;
 
+#if UNITY_EDITOR
+        isIf = !(!EventSystem.current.IsPointerOverGameObject() && Input.GetMouseButtonDown(0));
+        isElseIf = !Input.GetMouseButtonDown(0);
 #elif UNITY_ANDROID
-if (isNext)
-            {
-                return !((Input.touchCount > 0));
-            }
-            else
-            {
-                return !(Input.touchCount > 0);
-            }
+            isIf     = !(!EventSystem.current.IsPointerOverGameObject() && (Input.touchCount > 0 ));
+            isElseIf = !(Input.touchCount > 0);
 #endif
+
+        if (isNext)
+        { return isIf; }
+        else
+        { return isElseIf; }
     }
     public void Reset()
     {

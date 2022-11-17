@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Tower : MonoBehaviour, IHasColorTYPE
+public abstract class Tower : MonoBehaviour
 {
     #region SerializeFields
     [SerializeField] protected TOWER_TYPE TOWER_TYPE;
@@ -38,7 +38,7 @@ public abstract class Tower : MonoBehaviour, IHasColorTYPE
 
     #region Funcs
 
-    protected virtual void SetPrice()
+    private void SetPrice()
     {
         switch (TOWER_TYPE)
         {
@@ -64,7 +64,7 @@ public abstract class Tower : MonoBehaviour, IHasColorTYPE
                 break;
         }
     }
-    public abstract void SetCOLOR_TYPE();
+    protected abstract void SetCOLOR_TYPE();
     #endregion Funcs
 
 

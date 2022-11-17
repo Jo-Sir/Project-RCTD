@@ -16,10 +16,6 @@ public class Tile : MonoBehaviour, IBuildable
     #endregion Properties
 
     #region Funcs
-    public void Build()
-    {
-        
-    }
 
     public bool BuildCheck(out Tower tower)
     {

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class AttackTower : Tower, IAttackable
+public abstract class AttackTower : Tower
 {
     #region SerializeFields
     [SerializeField] protected float baseATK;
@@ -112,7 +112,7 @@ public abstract class AttackTower : Tower, IAttackable
         return this.target != null;
     }
     protected abstract void UseSkill();
-    public override void SetCOLOR_TYPE()
+    protected override void SetCOLOR_TYPE()
     {
         switch (COLOR_TYPE)
         {
@@ -142,13 +142,13 @@ public abstract class AttackTower : Tower, IAttackable
         }
         StopCoroutine(attackCo);
     }
-    protected virtual IEnumerator AttackCool(float CurAS)
+    protected IEnumerator AttackCool(float CurAS)
     {
         isAttack = true;
         yield return new WaitForSeconds(CurAS);
         isAttack = false;
     }
-    protected virtual IEnumerator SkillCollTime()
+    protected IEnumerator SkillCollTime()
     {
         skillCoolTimeOn = false;
         yield return new WaitForSeconds(coolTime);

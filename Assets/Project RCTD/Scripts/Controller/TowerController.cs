@@ -9,7 +9,7 @@ public class TowerController : MonoBehaviour
 {
     #region Fields
     private RaycastHit hit;
-    Ray ray;
+    private Ray ray;
     private Tower curTower = null;
     private IBuildable curTile = null;
     private IEnumerator interactionCo;
@@ -29,6 +29,7 @@ public class TowerController : MonoBehaviour
     }
     #endregion
 
+
     #region Funcs
     /// <summary>
     /// 클릭한 곳의 타일이나 타워 상호작용
@@ -40,6 +41,17 @@ public class TowerController : MonoBehaviour
 #if UNITY_EDITOR
         if (hit.transform != null) curTile.ParticleOnOff(false);
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+#elif UNITY_ANDROID
+        if (IsPointerOverUIObject()) {return; }
+        if (hit.transform != null) curTile.ParticleOnOff(false);
+        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+        {
+            ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);  
+        }
+
+
+#endif
+
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, 1 << 7))
         {
             if (hit.transform.GetComponent<IBuildable>() == null) return;
@@ -63,39 +75,6 @@ public class TowerController : MonoBehaviour
             curTower = null;
             UIManager.Instance.ClickGroundUI();
         }
-#elif UNITY_ANDROID
-        if (IsPointerOverUIObject()) {return; }
-        if (hit.transform != null) curTile.ParticleOnOff(false);
-        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
-        {
-            Debug.Log("ray 들어옴");
-            ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);  
-        }
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity, 1 << 7))
-        {
-            if (hit.transform.GetComponent<IBuildable>() == null) return;
-            curTile = hit.transform.GetComponent<IBuildable>();
-            curTile.ParticleOnOff(true);
-            if (curTile.BuildCheck(out curTower))
-            {
-                UIManager.Instance.ClickTileUI();
-            }
-            else
-            {
-                UIManager.Instance.ClickTowerUI();
-                UIManager.Instance.TowerPurchaseButtonUpdate();
-            }
-            UIManager.Instance.TowerInfoUpdate();
-        }
-        else
-        {
-            Debug.Log("else");
-            if (curTile != null) { curTile.ParticleOnOff(false); }
-            curTile = null;
-            curTower = null;
-            UIManager.Instance.ClickGroundUI();
-        }
-#endif
     }
     /// <summary>
     ///  타워생성
@@ -197,15 +176,14 @@ public class TowerController : MonoBehaviour
     #endregion Funcs
 
     #region IEnumerator
-    IEnumerator InteractionCo()
+    private IEnumerator InteractionCo()
     {
         while (GameManager.Instance.GameOver == false)
         {
 #if UNITY_EDITOR
             yield return new CustomInputTouchCo(true);
 #elif UNITY_ANDROID
-yield return new CustomInputTouchCo(false);
-
+            yield return new CustomInputTouchCo(false);
 #endif
             Interaction();
         }

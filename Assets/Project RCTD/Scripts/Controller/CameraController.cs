@@ -42,20 +42,25 @@ public class CameraController : MonoBehaviour
             transform.position = new Vector3(transform.position.x, transform.position.y, Mathf.Clamp(curMouseY, -10.25f, -6.18f));
         }
 #elif UNITY_ANDROID
-        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+        #region UNITY_ANDROID
+        if(Input.touchCount > 0)
         {
-            beganTouch = Input.GetTouch(0).position.y;
+            if (Input.GetTouch(0).phase == TouchPhase.Began)
+            {
+                beganTouch = Input.GetTouch(0).position.y;
+            }
+            if(Input.GetTouch(0).phase == TouchPhase.Stationary)
+            {
+                beganTouch = Input.GetTouch(0).position.y;
+            }
+            // 胶农费吝老锭
+            if (Input.GetTouch(0).phase == TouchPhase.Moved)
+            {
+                curTouch = (beganTouch - Input.GetTouch(0).position.y) * 0.001f + transform.position.z;
+                transform.position = new Vector3(transform.position.x, transform.position.y, Mathf.Clamp(curTouch, -10.25f, -6.18f));
+            }
         }
-        if(Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Stationary)
-        {
-            beganTouch = Input.GetTouch(0).position.y;
-        }
-        // 胶农费吝老锭
-        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved)
-        {
-            curTouch = (beganTouch - Input.GetTouch(0).position.y) * 0.001f + transform.position.z;
-            transform.position = new Vector3(transform.position.x, transform.position.y, Mathf.Clamp(curTouch, -10.25f, -6.18f));
-        }
+        #endregion
 #endif
     }
     #endregion
