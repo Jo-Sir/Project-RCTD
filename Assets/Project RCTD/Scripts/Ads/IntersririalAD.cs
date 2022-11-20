@@ -29,8 +29,7 @@ public class IntersririalAD : MonoBehaviour
     private void RequestInterstitial()
     {
 #if UNITY_ANDROID
-        // 전면 ID 넣기
-        string adUnitId = "ca-app-pub-3940256099942544/1033173712";
+        string adUnitId = "ca-app-pub-6565752735223045/9226679440";
 #elif UNITY_IPHONE
         string adUnitId = "ca-app-pub-6565752735223045/9226679440";
 #else
