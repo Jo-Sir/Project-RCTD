@@ -30,14 +30,8 @@ public class Tile : MonoBehaviour, IBuildable
     }
     public void ParticleOnOff(bool on)
     {
-        if (on)
-        {
-            particle.SetActive(true);
-        }
-        else
-        { 
-            particle.SetActive(false);
-        }
+        if (on) { particle.SetActive(true); }
+        else {  particle.SetActive(false); }
     }
     #endregion Funcs
 }

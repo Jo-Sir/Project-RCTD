@@ -171,8 +171,7 @@ public class Creep : MonoBehaviour, IDamagable
         if (GameManager.Instance.Wave >= 5) { hp *= 2f; }
         if (GameManager.Instance.Wave >= 10) { hp *= 2f; }
         if (GameManager.Instance.Wave >= 15) { hp *= 2f; }
-        if (GameManager.Instance.Wave <= 0)
-        { CurHp = hp * 1; }
+        if (GameManager.Instance.Wave <= 0) { CurHp = hp * 1; }
         else { CurHp = hp * GameManager.Instance.Wave; }
         
     }
@@ -205,9 +204,7 @@ public class Creep : MonoBehaviour, IDamagable
         {
             case DEBUFF_TYPE.SLOW:
                 if (SetDeBuffTimeCo == null) 
-                {
-                    SetDeBuffTimeCo = SetDeBuffTime(deBuffname, deBuffTime, figure);
-                }
+                { SetDeBuffTimeCo = SetDeBuffTime(deBuffname, deBuffTime, figure); }
                 CurMoveSpeed -= figure;
                 StartCoroutine(SetDeBuffTimeCo);
                 break;

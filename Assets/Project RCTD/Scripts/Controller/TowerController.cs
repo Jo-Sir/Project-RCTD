@@ -15,13 +15,6 @@ public class TowerController : MonoBehaviour
     private IEnumerator interactionCo;
     #endregion Fields
 
-    #region UnityEngines
-    private void Awake()
-    {
-        StartCoroutine(InteractionCo());
-    }
-    #endregion UnityEngines
-
     #region Property
     public Tower CurTower
     {
@@ -29,6 +22,12 @@ public class TowerController : MonoBehaviour
     }
     #endregion
 
+    #region UnityEngines
+    private void Awake()
+    {
+        StartCoroutine(InteractionCo());
+    }
+    #endregion UnityEngines
 
     #region Funcs
     /// <summary>
@@ -36,31 +35,24 @@ public class TowerController : MonoBehaviour
     /// </summary>
     private void Interaction()
     {
-
-
 #if UNITY_EDITOR
         if (hit.transform != null) curTile.ParticleOnOff(false);
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 #elif UNITY_ANDROID
-        if (IsPointerOverUIObject()) {return; }
+        if (IsPointerOverUIObject()) { return; }
         if (hit.transform != null) curTile.ParticleOnOff(false);
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
         {
             ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);  
         }
-
-
 #endif
-
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, 1 << 7))
         {
-            if (hit.transform.GetComponent<IBuildable>() == null) return;
+            if (hit.transform.GetComponent<IBuildable>() == null) { return; }
             curTile = hit.transform.GetComponent<IBuildable>();
             curTile.ParticleOnOff(true);
-            if (curTile.BuildCheck(out curTower))
-            {
-                UIManager.Instance.ClickTileUI();
-            }
+            if (curTile.BuildCheck(out curTower)) 
+            {  UIManager.Instance.ClickTileUI(); }
             else
             {
                 UIManager.Instance.ClickTowerUI();
@@ -189,11 +181,4 @@ public class TowerController : MonoBehaviour
         }
     }
 #endregion
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.black;
-        Gizmos.DrawLine(transform.position, hit.point);
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, 30f);
-    }
 }
