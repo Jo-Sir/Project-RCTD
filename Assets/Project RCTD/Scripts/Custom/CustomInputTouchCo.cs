@@ -7,10 +7,10 @@ public class CustomInputTouchCo : IEnumerator
 {
     private bool isNext;
     /// <summary>
-    /// isnext = true
-    /// !EventSystem.current.IsPointerOverGameObject() && Input.GetMouseButtonDown(0)
-    /// isnext = false
-    /// Input.GetMouseButtonDown(0);
+    /// isnext == true
+    /// UI가 아닌곳에 입력이됐나 확인
+    /// isnext == false
+    /// 입력 확인
     /// </summary>
     /// <param isNext="value"></param>
     public CustomInputTouchCo(bool value)
@@ -24,7 +24,6 @@ public class CustomInputTouchCo : IEnumerator
         {
             bool isIf;
             bool isElseIf;
-
 #if UNITY_EDITOR
             isIf     = !(!EventSystem.current.IsPointerOverGameObject() && Input.GetMouseButtonDown(0));
             isElseIf = !Input.GetMouseButtonDown(0);
@@ -32,7 +31,6 @@ public class CustomInputTouchCo : IEnumerator
             isIf     = !(!EventSystem.current.IsPointerOverGameObject() && (Input.touchCount > 0 ));
             isElseIf = !(Input.touchCount > 0);
 #endif
-
             if (isNext)
             { return isIf; }
             else

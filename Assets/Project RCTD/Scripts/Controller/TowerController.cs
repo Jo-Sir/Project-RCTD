@@ -75,8 +75,7 @@ public class TowerController : MonoBehaviour
     {
         if (GameManager.Instance.Gold < 200) return;
         if (curTile.BuildCheck(out curTower) == false) return;
-        int[] towerRange = { 0, 2 };
-        Enum key = ((TOWER_TYPE)UnityEngine.Random.Range(towerRange[0], towerRange[1]));
+        Enum key = ((TOWER_TYPE)UnityEngine.Random.Range(0, 2));
         if (curTower != null) return;
         if (curTile == null) return;
         GameObject obj = GameManager.Instance.ObjectGet(key, curTile.GetTransForm());
@@ -106,17 +105,14 @@ public class TowerController : MonoBehaviour
         }
         if (sameTraget == null) return;
         int[] towerRange = new int[2];
-        // Debug.Log((int)TOWER_TYPE);
         if (0 >= (int)TOWER_TYPE || (int)TOWER_TYPE <= 1)
         {
-            // Debug.Log("2단계");
             towerRange[0] = 2;
             towerRange[1] = 8;
 
         }
         else if (2 >= (int)TOWER_TYPE || (int)TOWER_TYPE <= 7)
         {
-            // Debug.Log("3단계");
             towerRange[0] = 8;
             towerRange[1] = 12;
         }
@@ -124,6 +120,7 @@ public class TowerController : MonoBehaviour
         {
             return;
         }
+        // 소환 할 위치
         Transform parentTransform = curTower.transform.parent;
         // 같은 오브젝트 두개 반납
         GameManager.Instance.ObjectReturn(TOWER_TYPE, curTower.gameObject);

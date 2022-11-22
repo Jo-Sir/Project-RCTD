@@ -28,7 +28,7 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
     /// </summary>
     public void Init()
     {
-        // 인스팩터창에서 입력된데이터가 없으면 리턴
+        // objectDatas에 데이터가 없으면 리턴
         if (objectDatas.Count == 0) { return; }
         // 있으면 딕셔너리 초기화
         poolDict = new Dictionary<string, Stack<GameObject>>();
@@ -112,7 +112,6 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
         obj.transform.SetParent(null);
         obj.transform.position = parentTransform.position;
         obj.gameObject.SetActive(true);
-        // obj.transform.position = transform.position;
         return obj;
     }
     /// <summary>

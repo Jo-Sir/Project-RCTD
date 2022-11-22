@@ -133,6 +133,7 @@ public class GameManager : Singleton<GameManager>
             UIManager.Instance.GameResult("Game Over");
         }
     }
+
     public GameObject ObjectGet(Enum key, Transform parentTransform)
     {
         return ObjectPoolManager.Instance.GetObject(key.ToString(), parentTransform);
@@ -141,6 +142,7 @@ public class GameManager : Singleton<GameManager>
     {
         ObjectPoolManager.Instance.ReturnObject(key.ToString(), obj);
     }
+
     #endregion
 
     #region IEnumerator
