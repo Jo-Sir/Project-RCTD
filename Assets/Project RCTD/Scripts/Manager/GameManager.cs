@@ -33,6 +33,8 @@ public class GameManager : Singleton<GameManager>
         }
         get => life;
     }
+
+
     public int Gold
     {
         set 
@@ -80,19 +82,20 @@ public class GameManager : Singleton<GameManager>
     #endregion UnityEngines
 
     #region Funcs
+
+
     public void Init()
     {
         SetInitScreen();
         ObjectPoolManager.Instance.Init();
     }
-    public void GetInterstitialAd(InterstitialAd interstitialAd)
+    public void ReturnAllObjFunc(Enum key, GameObject obj)
     {
-        this.interstitial = interstitialAd;
+        returnAllObj += () => ObjectReturn(key, obj);
     }
-    public void GetBannerView(BannerView bannerView)
-    { 
-        this.bannerView = bannerView;
-    }
+    public void GetInterstitialAd(InterstitialAd interstitialAd)=> this.interstitial = interstitialAd;
+    public void GetBannerView(BannerView bannerView)=> this.bannerView = bannerView;
+    
     public void SetInitScreen()
     {
         Screen.SetResolution(1920, 1080, true);
@@ -101,23 +104,34 @@ public class GameManager : Singleton<GameManager>
     public void GameStart()
     {
         returnAllObj?.Invoke();
+        GameStartSetting();
+    }
+
+    public void BackToMainMenu()
+    {
+        returnAllObj?.Invoke();
+        BackToMainMenuSetting();
+    }
+
+    private void GameStartSetting()
+    {
         gold = 400;
         wave = 0;
         life = 20;
         gameOver = false;
         StartCoroutine(FadeOutTerm("GameScenes"));
     }
-    public void BackToMainMenu()
+
+    private void BackToMainMenuSetting()
     {
         Time.timeScale = 1f;
         GameOver = true;
         StartCoroutine(FadeOutTerm("MainScenes"));
-        returnAllObj?.Invoke();
     }
-    public void GameExit() 
-    {
-        Application.Quit();
-    }
+
+    public void GameExit() => Application.Quit();
+
+
     /// <summary>
     /// true = Game Clear, false = Game Over
     /// </summary>
@@ -135,14 +149,11 @@ public class GameManager : Singleton<GameManager>
     }
 
     public GameObject ObjectGet(Enum key, Transform parentTransform)
-    {
-        return ObjectPoolManager.Instance.GetObject(key.ToString(), parentTransform);
-    }
+    => ObjectPoolManager.Instance.GetObject(key.ToString(), parentTransform);
+   
     public void ObjectReturn(Enum key, GameObject obj)
-    {
-        ObjectPoolManager.Instance.ReturnObject(key.ToString(), obj);
-    }
-
+    => ObjectPoolManager.Instance.ReturnObject(key.ToString(), obj);
+   
     #endregion
 
     #region IEnumerator

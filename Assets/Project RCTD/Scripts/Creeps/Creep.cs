@@ -96,22 +96,8 @@ public class Creep : MonoBehaviour, IDamagable
     #region UnityEngines
     private void Awake()
     {
-        hitParticle = GetComponentInChildren<ParticleSystem>();
-        paths = pathsData.paths;
-        animator = GetComponent<Animator>();
-        audioSource = GetComponent<AudioSource>();
-        colledr = GetComponent<CapsuleCollider>();
-        agent = GetComponent<NavMeshAgent>();
-        creepUIController = GetComponentInChildren<CreepUIController>();
-        material = GetComponentInChildren<Renderer>().material;
-        Transform[] patharr = paths.GetComponentsInChildren<Transform>();
-        tragetTransform = new List<Transform>();
-        foreach (Transform target in patharr)
-        {
-            if (paths.name == target.name) continue;
-            tragetTransform.Add(target);
-        }
-        GameManager.Instance.returnAllObj += () => GameManager.Instance.ObjectReturn(ROUND_TYPE, gameObject);
+        CreepInit();
+        GameManager.Instance.ReturnAllObjFunc(ROUND_TYPE, gameObject);
     }
     private void Update()
     {
@@ -166,6 +152,24 @@ public class Creep : MonoBehaviour, IDamagable
     #endregion UnityEngines
 
     #region Funcs
+    private void CreepInit()
+    {
+        hitParticle = GetComponentInChildren<ParticleSystem>();
+        paths = pathsData.paths;
+        animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
+        colledr = GetComponent<CapsuleCollider>();
+        agent = GetComponent<NavMeshAgent>();
+        creepUIController = GetComponentInChildren<CreepUIController>();
+        material = GetComponentInChildren<Renderer>().material;
+        Transform[] patharr = paths.GetComponentsInChildren<Transform>();
+        tragetTransform = new List<Transform>();
+        foreach (Transform target in patharr)
+        {
+            if (paths.name == target.name) continue;
+            tragetTransform.Add(target);
+        }
+    }
     public void SetHP()
     {
         if (GameManager.Instance.Wave >= 5) { hp *= 2f; }
