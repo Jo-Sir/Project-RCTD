@@ -9,7 +9,7 @@ using GoogleMobileAds.Api;
 public class GameManager : Singleton<GameManager>
 {
     #region Fields
-    public UnityAction returnAllObj;
+    public Action returnAllObj;
     private int wave;
     private int gold;
     private int life;

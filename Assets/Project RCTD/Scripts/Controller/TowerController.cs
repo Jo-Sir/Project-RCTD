@@ -12,7 +12,6 @@ public class TowerController : MonoBehaviour
     private Ray ray;
     private Tower curTower = null;
     private IBuildable curTile = null;
-    private IEnumerator interactionCo;
     #endregion Fields
 
     #region Property
@@ -73,11 +72,11 @@ public class TowerController : MonoBehaviour
     /// </summary>
     public void TowerPurchase()
     {
-        if (GameManager.Instance.Gold < 200) return;
-        if (curTile.BuildCheck(out curTower) == false) return;
+        if (GameManager.Instance.Gold < 200) { return; }
+        if (curTile.BuildCheck(out curTower) == false) { return; }
         Enum key = ((TOWER_TYPE)UnityEngine.Random.Range(0, 2));
-        if (curTower != null) return;
-        if (curTile == null) return;
+        if (curTower != null) { return; }
+        if (curTile == null) { return; }
         GameObject obj = GameManager.Instance.ObjectGet(key, curTile.GetTransForm());
         obj.transform.SetParent(curTile.GetTransForm());
         obj.transform.position += new Vector3(0, 0.5f, 0);
@@ -145,13 +144,6 @@ public class TowerController : MonoBehaviour
         GameManager.Instance.Gold += curTower.Price;
         GameManager.Instance.ObjectReturn(key, curTower.gameObject);
         UIManager.Instance.ClickTileUI();
-    }
-    /// <summary>
-    /// 타워 정보
-    /// </summary>
-    public Tower TowerInfo()
-    {
-        return curTower;
     }
 
     private bool IsPointerOverUIObject()
